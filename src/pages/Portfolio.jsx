@@ -42,9 +42,63 @@ function Portfolio() {
         { title: "Today's Change", value: `+ $${last.card2}`, },
         { title: "Best Performing", value: `AAPL +${last.card3 / 10}%`, }
     ]
-    let [balance,setBalance] = useState(0)
+    let [balance, setBalance] = useState(150)
+    let [cashStatus, setCashStatus] = useState(false)
+    let inpValue = ''
+    function deposit() {
+        setCashStatus(true)
+    }
+    function onClose() {
+        setCashStatus(false)
+    }
+    let modalStyle = {
+        transform: cashStatus ? 'translateY(0px)' : 'translateY(-100px)',
+        opacity: cashStatus ? 1 : 0,
+        transition: '0.3s'
+    }
+    // function inpValue(params) {
+        
+    // }
     return (
         <div className='portfolio'>
+            <div className='modal-bg' style={{ left: cashStatus ? '0' : '-100vw' }}>
+                <div className='modal-cash' style={modalStyle}>
+                    {/* Крестик */}
+                    <button className="modal-close" onClick={onClose}>×</button>
+
+                    <h2 className="modal-title">Deposit Funds</h2>
+
+                    <form className="modal-form" onSubmit={(e) => {
+                        e.preventDefault();
+                        setCashStatus(false)
+                        setBalance(+balance + +inpValue)
+                    }}>
+                        <div className="form-group">
+                            <label htmlFor="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxLength="19" required />
+                        </div>
+
+                        <div className="form-row">
+                            <div className="form-group">
+                                <label htmlFor="expiry">Expiry Date</label>
+                                <input type="text" id="expiry" placeholder="MM/YY" maxLength="5" required />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="cvc">CVC</label>
+                                <input type="text" id="cvc" placeholder="123" maxLength="4" required />
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="amount">Amount</label>
+                            <input type="number" id="amount" placeholder="$100.00" required onChange={(e) => inpValue = e.target.value} />
+                        </div>
+
+                        <button type="submit" className="btn-deposit">Deposit</button>
+                    </form>
+                </div>
+            </div>
             <div className='portfolio-header'>
                 <h3>Portfolio</h3>
                 <div className='person-info'>
@@ -64,7 +118,7 @@ function Portfolio() {
                     <p>Cash Balance</p>
                     <div>
                         <h3>{balance}$</h3>
-                        <div className='cash-button'>Deposit</div>
+                        <div className='cash-button' onClick={() => deposit()}>Deposit</div>
                     </div>
                 </div>
             </div>

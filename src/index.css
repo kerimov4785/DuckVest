@@ -211,6 +211,95 @@ main {
   color: rgba(255, 255, 255, 0.795);
   margin: 24px 0;
 }
+/* modal */
+.modal-bg{
+  position:fixed;
+  z-index: 2;
+  align-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.604);
+}
+.modal-cash{
+  margin: auto;
+  background-color: #1F243D;
+  padding: 24px;
+  width: 400px;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  font-family:'Inter';
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: white;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  margin-bottom: 4px;
+  display: block;
+  color: #5a6380;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+.form-group input:focus {
+  border-color: #3b82f6;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-deposit {
+  padding: 12px;
+  background-color: #ff7125;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:  0.2s ease;
+  font-family: 'Inter';
+}
+
+.btn-deposit:hover {
+  background-color: #ff7125cc;
+}
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  color: #6b7280;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+  color: #111827;
+}
 
 /* chart */
 .chart-container {
