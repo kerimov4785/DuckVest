@@ -42,6 +42,7 @@ function Portfolio() {
         { title: "Today's Change", value: `+ $${last.card2}`, },
         { title: "Best Performing", value: `AAPL +${last.card3 / 10}%`, }
     ]
+    let [balance,setBalance] = useState(0)
     return (
         <div className='portfolio'>
             <div className='portfolio-header'>
@@ -55,8 +56,17 @@ function Portfolio() {
                 </div>
             </div>
             <div className="porftolio-cards">
-                {a.map((item, index) => <Card key={index} {...item} />
-                )}
+                <div>
+                    {a.map((item, index) => <Card key={index} {...item} />
+                    )}
+                </div>
+                <div className='cash-card'>
+                    <p>Cash Balance</p>
+                    <div>
+                        <h3>{balance}$</h3>
+                        <div className='cash-button'>Deposit</div>
+                    </div>
+                </div>
             </div>
             <h4 className='title2'>Portfolio Performance</h4>
             <Chart />

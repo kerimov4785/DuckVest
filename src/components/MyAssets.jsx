@@ -3,13 +3,13 @@ import React from 'react'
 function MyAssets() {
   let myAssets = [
     { asset: 'AAPL', quantity: 10, buyprice: '$150', curprice: '$175', value: '$1,750', PL: '+$250' },
+    { asset: 'AAPL', quantity: 10, buyprice: '$150', curprice: '$175', value: '$1,750', PL: '-$250' },
+    { asset: 'AAPL', quantity: 10, buyprice: '$150', curprice: '$175', value: '$1,750', PL: '-$250' },
+    { asset: 'AAPL', quantity: 10, buyprice: '$150', curprice: '$175', value: '$1,750', PL: '+$250' },
+    { asset: 'AAPL', quantity: 10, buyprice: '$150', curprice: '$175', value: '$1,750', PL: '-$250' },
     { asset: 'AAPL', quantity: 10, buyprice: '$150', curprice: '$175', value: '$1,750', PL: '+$250' },
     { asset: 'AAPL', quantity: 10, buyprice: '$150', curprice: '$175', value: '$1,750', PL: '+$250' },
-    { asset: 'AAPL', quantity: 10, buyprice: '$150', curprice: '$175', value: '$1,750', PL: '+$250' },
-    { asset: 'AAPL', quantity: 10, buyprice: '$150', curprice: '$175', value: '$1,750', PL: '+$250' },
-    { asset: 'AAPL', quantity: 10, buyprice: '$150', curprice: '$175', value: '$1,750', PL: '+$250' },
-    { asset: 'AAPL', quantity: 10, buyprice: '$150', curprice: '$175', value: '$1,750', PL: '+$250' },
-    { asset: 'AAPL', quantity: 10, buyprice: '$150', curprice: '$175', value: '$1,750', PL: '+$250' },
+    { asset: 'AAPL', quantity: 10, buyprice: '$150', curprice: '$175', value: '$1,750', PL: '-$250' },
     { asset: 'AAPL', quantity: 10, buyprice: '$150', curprice: '$175', value: '$1,750', PL: '+$250' },
     { asset: 'AAPL', quantity: 10, buyprice: '$150', curprice: '$175', value: '$1,750', PL: '+$250' },
   ]
@@ -31,7 +31,7 @@ function MyAssets() {
             <div>{item.buyprice}</div>
             <div>{item.curprice}</div>
             <div>{item.value}</div>
-            <div>{item.PL}</div>
+            <div className={item.PL.startsWith('+') ? 'green' : 'red'}>{item.PL}</div>
           </div>
         )}
       </div>
