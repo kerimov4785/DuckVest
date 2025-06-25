@@ -9,7 +9,6 @@ function Card({ title, value }) {
         <div className='card'>
             <p>{title}</p>
             <h3>{value}</h3>
-            <h2>hello</h2>
         </div>
     )
 }
