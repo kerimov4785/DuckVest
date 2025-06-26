@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router"
 import Sidebar from "./components/Sidebar"
 import Portfolio from "./pages/Portfolio"
 import { useEffect, useState } from "react"
+import Account from "./pages/Account"
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/Portfolio" element={<Portfolio/>} />
+            <Route path="/Account" element={<Account />} />
           </Routes>
         </div>
       </main>

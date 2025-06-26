@@ -382,3 +382,64 @@ main {
 .red {
   color: #ff4d4d !important;
 }
+
+
+
+
+/* Account */
+
+.account-head{
+  padding-top: 15px;
+}
+
+.account-head h3{
+  font: 400 30px 'Inter';
+  color: white;
+  letter-spacing: 1px;
+}
+
+.account-card{
+  background-color: #071230;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: inset 1px 1px 2px #313755a6;
+  margin-top: 40px
+}
+
+.account-logo-name{
+  display:flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px
+}
+
+.account-logo{
+  background-color: #3356AA;
+  border-radius: 50%;
+  padding: 9px 10px
+}
+
+.account-logo img{
+  width: 45px;
+}
+
+.account-detail h4{
+  font: 400 25px 'Inter';
+  color: white;
+  letter-spacing: 1px;
+  margin-bottom: 5px
+}
+
+.account-detail p{
+  font: 400 14px 'Inter';
+  color: rgba(255, 255, 255, 0.308);
+}
+
+.account-card button{
+  background-color: #272D4E;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font: 400 12px 'Inter';
+  padding: 6px 8px
+}
