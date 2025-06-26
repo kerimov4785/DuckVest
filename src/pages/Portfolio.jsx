@@ -42,8 +42,9 @@ function Portfolio() {
         { title: "Today's Change", value: `+ $${last.card2}`, },
         { title: "Best Performing", value: `AAPL +${last.card3 / 10}%`, }
     ]
-    let [balance, setBalance] = useState(150)
+    let [balance, setBalance] = useState(localStorage.getItem('bln') || 0)
     let [cashStatus, setCashStatus] = useState(false)
+    let [dateValue, setDateValue] = useState('')
     let inpValue = ''
     function deposit() {
         setCashStatus(true)
@@ -51,19 +52,24 @@ function Portfolio() {
     function onClose() {
         setCashStatus(false)
     }
+    function formDate(e) {
+        setDateValue(e.target.value)
+        if (dateValue.length == 2 && e.nativeEvent.inputType != 'deleteContentBackward') {
+            setDateValue(e.target.value.slice(0, 2) + '/' + e.target.value.slice(2, 3))
+        }
+    }
     let modalStyle = {
         transform: cashStatus ? 'translateY(0px)' : 'translateY(-100px)',
         opacity: cashStatus ? 1 : 0,
         transition: '0.3s'
     }
     // function inpValue(params) {
-        
+
     // }
     return (
         <div className='portfolio'>
             <div className='modal-bg' style={{ left: cashStatus ? '0' : '-100vw' }}>
                 <div className='modal-cash' style={modalStyle}>
-                    {/* Крестик */}
                     <button className="modal-close" onClick={onClose}>×</button>
 
                     <h2 className="modal-title">Deposit Funds</h2>
@@ -71,6 +77,7 @@ function Portfolio() {
                     <form className="modal-form" onSubmit={(e) => {
                         e.preventDefault();
                         setCashStatus(false)
+                        localStorage.setItem('bln', +balance + +inpValue)
                         setBalance(+balance + +inpValue)
                     }}>
                         <div className="form-group">
@@ -81,12 +88,12 @@ function Portfolio() {
                         <div className="form-row">
                             <div className="form-group">
                                 <label htmlFor="expiry">Expiry Date</label>
-                                <input type="text" id="expiry" placeholder="MM/YY" maxLength="5" required />
+                                <input value={dateValue} onChange={(e) => formDate(e)} type="text" id="expiry" placeholder="MM/YY" maxLength="5" required />
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="cvc">CVC</label>
-                                <input type="text" id="cvc" placeholder="123" maxLength="4" required />
+                                <label htmlFor="cvc">CVV</label>
+                                <input type="text" id="cvv" placeholder="123" maxLength="4" required />
                             </div>
                         </div>
 
