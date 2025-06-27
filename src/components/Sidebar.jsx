@@ -36,12 +36,6 @@ function Sidebar() {
                             <p>Achievements</p>
                         </div>
                     </NavLink>
-                    <NavLink to={'/Trade'}>
-                        <div>
-                            <ArrowLeftRight size={22} color='rgba(255, 255, 255,.4)'/>
-                            <p>Trade</p>
-                        </div>
-                    </NavLink>
                 </nav>
             </div>
         </div>
