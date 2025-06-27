@@ -4,6 +4,7 @@ import Portfolio from "./pages/Portfolio"
 import { useEffect, useState } from "react"
 import Account from "./pages/Account"
 import Watchlist from "./pages/Watchlist"
+import Achievments from "./pages/Achievments"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/Portfolio" element={<Portfolio/>} />
             <Route path="/Account" element={<Account />} />
             <Route path="/Watchlist" element={<Watchlist/>} />
+            <Route path="/Achievments" element={<Achievments/>}/>
           </Routes>
         </div>
       </main>
