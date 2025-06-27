@@ -137,7 +137,7 @@ function LikedAssets() {
             <div className="liked-table-body">
                 {stocks.map((item, i) =>
                     <div key={i} className='liked-table-row'>
-                        <div>{item.asset}</div>
+                        <div>{item.asset.length >= 15 ? item.asset.slice(0,15) + '...' : item.asset}</div>
                         <div>{item.symbol}</div>
                         <div>{item.bid}</div>
                         <div>{item.ask}</div>

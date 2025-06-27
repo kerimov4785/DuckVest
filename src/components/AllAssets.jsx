@@ -127,8 +127,8 @@ function AllAssets() {
         <div className='all-table'>
             <h4>All Assets</h4>
             <div className="all-table-body">
-                {allStock.map(item => (
-                    <div className='stock-card gradient-1'>
+                {allStock.map((item,i) => (
+                    <div key={i} className='stock-card gradient-1'>
                         <div>
                             <h3>{item.asset}</h3>
                             <p>{item.symbol}</p>

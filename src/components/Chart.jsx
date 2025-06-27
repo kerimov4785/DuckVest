@@ -24,17 +24,17 @@ function Chart() {
         <div className="chart-container">
             <ResponsiveContainer width="100%" height={300}>
                 <LineChart  data={data}>
-                    <CartesianGrid vertical={false} horizontal={true} stroke="#ffffff1a" strokeDasharray="4" />
+                    <CartesianGrid vertical={false} horizontal={true} stroke="#ffffff0d" strokeDasharray="3 3" />
                     <XAxis axisLine={false} tick={{
                         fontSize: '14px',
                         fontFamily: 'Inter',
-                        fill: '#ffffff2a',
+                        fill: '#ffffff4d',
                         dy: 10
                     }} dataKey="name" />
                     <YAxis ticks={[0, 20, 40, 60, 80, 100, 120, 140]} axisLine={false} tick={{
                         fontSize: '14px',
                         fontFamily: 'Inter',
-                        fill: '#ffffff2a',
+                        fill: '#ffffff4d',
                         dx: -8,
                         dy: -2
                     }} />
