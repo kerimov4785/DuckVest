@@ -678,7 +678,6 @@ main {
 }
 .liked-table-body  .liked-table-row:last-child{
   transition: .5s;
-  animation: lastAsset .4s ease-in  1 ;
 }
 .empty-body{
   display: flex;
