@@ -444,7 +444,7 @@ body::-webkit-scrollbar-thumb:hover {
 /* Account */
 
 .account-head {
-  padding-top: 15px;
+  padding-top: 20px;
 }
 
 .account-head h3 {
@@ -505,6 +505,51 @@ body::-webkit-scrollbar-thumb:hover {
   background-color: #3B4371;
   padding: 6px 8px
 }
+
+.settings{
+  margin-top: 40px
+}
+
+.settings h4{
+  font: 400 25px 'Inter';
+  color: white;
+  letter-spacing: 1px;
+}
+
+.settings-card{
+  background-color: #071230;
+  padding: 20px 40px;
+  border-radius: 20px;
+  box-shadow: inset 1px 1px 2px #313755a6;
+  margin-top: 20px
+}
+
+.settings-card hr{
+  border: none;
+  background-color: rgb(21, 34, 66);
+  height: 1px
+}
+
+.setting-row{
+  display: flex;
+  gap: 220px;
+  padding-block: 15px
+}
+
+.setting-row h5{
+  font: 400 14px 'Inter';
+  color: rgba(255, 255, 255, 0.8);
+  width: 150px
+}
+
+.setting-row p{
+  font: 400 14px 'Inter';
+  color: white;
+}
+
+
+
+
 
 /* watchlist */
 .watchlist>h4 {

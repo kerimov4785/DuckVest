@@ -18,6 +18,30 @@ function Account() {
             <button>Edit Profile</button>
         </div>
       </div>
+      <div className="settings">
+        <h4>Settings</h4>
+        <div className="settings-card">
+          <div className="setting-row">
+            <h5>Email</h5>
+            <p>nihatkerimov@gmail.com</p>
+          </div>
+          <hr />
+          <div className="setting-row">
+            <h5>Password</h5>
+            <p style={{fontSize: "10px"}}>● ● ● ● ● ● ● ●</p>
+          </div>
+          <hr />
+          <div className="setting-row">
+            <h5>Phone</h5>
+            <p>+1 234 567 8900</p>
+          </div>
+          <hr />
+          <div className="setting-row">
+            <h5>Country</h5>
+            <p>United States</p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
