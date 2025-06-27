@@ -46,7 +46,7 @@ body::-webkit-scrollbar-thumb:hover {
   position: fixed;
   top: 0;
   /* background: #081537 !important; */
-  background: 
+  background:
     linear-gradient(160deg, #081537 0%, #050b22 100%),
     radial-gradient(circle at 20% 70%, rgba(255, 113, 37, 0.03) 0%, transparent 30%);
   box-shadow: inset -1px 0 1px rgba(255, 255, 255, 0.03);
@@ -130,15 +130,13 @@ main {
   padding-bottom: 30px;
   min-height: 100vh;
   background: #040d2c;
-  background: 
+  background:
     radial-gradient(ellipse at 70% 30%, #040d2c 0%, #020617 105%),
-    repeating-linear-gradient(
-      45deg,
+    repeating-linear-gradient(45deg,
       rgba(255, 113, 37, 0.02) 0px,
       rgba(255, 113, 37, 0.02) 1px,
       transparent 1px,
-      transparent 4px
-    );
+      transparent 4px);
 }
 
 /* main {
@@ -385,7 +383,7 @@ main {
   padding: 20px 26px;
   /* background-color: #071230; */
   box-shadow: inset 1px 1px 2px #313755a6;
-  border-radius: 20px;
+  border-radius: 12px;
   background: rgba(6, 17, 52, 0.6);
   backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -434,7 +432,7 @@ main {
 }
 
 .stock-row:hover {
-  background-color: #0a193d;
+  background-color: #0a193da1;
 }
 
 .stock-body::-webkit-scrollbar {
@@ -536,13 +534,15 @@ main {
   outline: none;
   color: white;
   font: 400 15px 'Inter';
-  border: 1px solid #31375571;
-  background-color: #071230b3;
+  border:none;
+  background-color: rgba(8, 21, 55, 0.5);
   border-radius: 7px;
   padding: 13px 40px;
   width: 100%;
 }
-
+.watchlist input:focus{
+  border:1px solid rgba(255, 113, 37, 0.5) ;
+}
 .input-box {
   margin: 15px 0;
   position: relative;
@@ -569,9 +569,11 @@ main {
 
 .liked-table {
   width: 70%;
-  background-color: #071230;
+  /* background-color: #071230; */
   border-radius: 10px;
   padding: 0 10px 20px 20px;
+  background: rgba(8, 21, 55, 0.5);
+  backdrop-filter: blur(4px);
 }
 
 .liked-table-header {
@@ -616,6 +618,7 @@ main {
   padding: 12px 15px;
   align-items: center;
   background-color: #09183be3;
+  background-color: #081537;
   border-radius: 10px;
 }
 
@@ -634,7 +637,15 @@ main {
   padding: 6px;
   width: 60px;
   border-radius: 7px;
-  background-color: #f56a20bd;
+  background: rgba(255, 113, 37, 0.15);
+  color: #FF7125;
+  border: 1px solid rgba(255, 113, 37, 0.5);
+  transition: all 0.3s ease;
+}
+
+.buy-button>p:hover {
+  background: rgba(255, 113, 37, 0.3);
+  box-shadow: 0 0 10px rgba(255, 113, 37, 0.2);
 }
 
 .all-table {
@@ -653,7 +664,7 @@ main {
 
 .all-table-body {
   height: 57vh;
-  border-radius: 10px;
+  border-radius: 7px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -683,22 +694,10 @@ main {
 
 .gradient-1 {
   background: linear-gradient(135deg, #23b9b7de, #0e5f85);
-}
-
-.gradient-2 {
-  background: linear-gradient(135deg, rgba(255, 140, 0, 0.25), rgba(255, 0, 0, 0.2));
-}
-
-.gradient-3 {
-  background: linear-gradient(135deg, rgba(100, 255, 100, 0.25), rgba(0, 200, 100, 0.2));
-}
-
-.gradient-4 {
-  background: linear-gradient(135deg, rgba(140, 0, 255, 0.25), rgba(0, 100, 255, 0.2));
-}
-
-.gradient-5 {
-  background: linear-gradient(135deg, rgba(255, 255, 0, 0.25), rgba(255, 100, 0, 0.2));
+  background: linear-gradient(135deg, rgba(35, 185, 183, 0.4), rgba(14, 95, 133, 0.3));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  /* border: 1px solid rgba(255, 255, 255, 0.18); */
 }
 
 .chart-container::before {
@@ -711,7 +710,13 @@ main {
   background: linear-gradient(90deg, transparent, #FF7125, transparent);
   animation: scanline 3s linear infinite;
 }
+
 @keyframes scanline {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(100%); }
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
 }
