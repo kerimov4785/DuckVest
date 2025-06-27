@@ -665,6 +665,7 @@ main {
   background-color: #09183be3;
   background-color: #081537;
   border-radius: 10px;
+  transform: translateX(-200px);
 }
 
 .liked-table-row div {
@@ -674,6 +675,10 @@ main {
 .liked-table-row>div:first-child,
 .liked-table-header>div:first-child {
   flex: 1.5;
+}
+.liked-table-body  .liked-table-row:last-child{
+  transition: .5s;
+  animation: lastAsset .4s ease-in  1 ;
 }
 .empty-body{
   display: flex;
@@ -772,5 +777,16 @@ main {
 
   100% {
     transform: translateY(100%);
+  }
+}
+@keyframes lastAsset {
+  0% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

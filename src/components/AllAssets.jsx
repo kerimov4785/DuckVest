@@ -148,7 +148,8 @@ function AllAssets({ stocks, setStocks }) {
         }
         else {
             setStocks(stocks.filter(item => item.id != id))
-            console.log('-');   
+            console.log('-');
+               
         }
         setSaved({ ...saved, [id]: !saved[id], });
         console.log(stocks)
