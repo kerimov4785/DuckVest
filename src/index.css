@@ -630,7 +630,16 @@ main {
 .liked-table-header>div:first-child {
   flex: 1.5;
 }
-
+.empty-body{
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.039);
+  /* color: #0e5f852a; */
+  text-transform: uppercase;
+  font: 300 42px 'Inter';
+}
 .buy-button>p {
   cursor: pointer;
   margin: auto;

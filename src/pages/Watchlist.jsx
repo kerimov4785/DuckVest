@@ -1,9 +1,11 @@
 import { Search } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 import AllAssets from '../components/AllAssets'
 import LikedAssets from '../components/LikedAssets'
 
 function Watchlist() {
+    const [stocks,setStocks] = useState([])
+
     return (
         <div className='watchlist'>
             <div className='watchlist-header'>
@@ -22,8 +24,8 @@ function Watchlist() {
                 <input type="text" placeholder='Search or filter assets...' />
             </div>
             <div className='watch-tables'>
-                <LikedAssets/>
-                <AllAssets />
+                <LikedAssets stocks={stocks} setStocks={setStocks}/>
+                <AllAssets  stocks={stocks} setStocks={setStocks}/>
             </div>
         </div>
     )
