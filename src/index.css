@@ -496,13 +496,6 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 6px;
   color: white;
   font: 400 12px 'Inter';
-  padding: 6px 8px;
-  transition: background-color 0.3s ease;
-  cursor: pointer
-}
-
-.account-card button:hover {
-  background-color: #3B4371;
   padding: 6px 8px
 }
 
@@ -517,8 +510,8 @@ body::-webkit-scrollbar-thumb:hover {
   outline: none;
   color: white;
   font: 400 15px 'Inter';
-  border: 1px solid #31375550;
-  background-color: #0712308f;
+  border: 1px solid #31375571;
+  background-color: #071230b3;
   border-radius: 7px;
   padding: 13px 40px;
   width: 100%;
@@ -599,7 +592,9 @@ body::-webkit-scrollbar-thumb:hover {
 .liked-table-row div {
   font-size: 15px;
 }
-
+.liked-table-row > div:first-child, .liked-table-header > div:first-child{
+  flex: 1.5;
+}
 .buy-button>p {
   cursor: pointer;
   margin: auto;
@@ -667,5 +662,4 @@ body::-webkit-scrollbar-thumb:hover {
 
 .gradient-5 {
   background: linear-gradient(135deg, rgba(255, 255, 0, 0.25), rgba(255, 100, 0, 0.2));
-
 }
