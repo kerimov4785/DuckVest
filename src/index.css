@@ -441,5 +441,11 @@ main {
   border-radius: 6px;
   color: white;
   font: 400 12px 'Inter';
-  padding: 6px 8px
+  padding: 6px 8px;
+  transition: background-color 0.3s ease;
+  cursor: pointer
+}
+
+.account-card button:hover {
+  background-color: #3B4371;
 }
