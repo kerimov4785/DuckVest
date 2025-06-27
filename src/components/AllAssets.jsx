@@ -155,7 +155,7 @@ function AllAssets({ stocks, setStocks }) {
     };
     return (
         <div className='all-table'>
-            <h4>All Assets</h4>
+            <h4>All Stocks</h4>
             <div className="all-table-body">
                 {allStock.map((item, i) => (
                     <div key={i} className='stock-card gradient-1'>
