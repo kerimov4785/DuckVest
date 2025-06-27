@@ -38,16 +38,18 @@ body::-webkit-scrollbar-thumb:hover {
   background-color: #5a6380;
 }
 
-
 .sidebar {
   width: 260px;
   height: 100vh;
-  background-color: #1F243D;
-  background-color: #071436;
   color: white;
   padding: 10px 13px;
   position: fixed;
   top: 0;
+  /* background: #081537 !important; */
+  background: 
+    linear-gradient(160deg, #081537 0%, #050b22 100%),
+    radial-gradient(circle at 20% 70%, rgba(255, 113, 37, 0.03) 0%, transparent 30%);
+  box-shadow: inset -1px 0 1px rgba(255, 255, 255, 0.03);
 }
 
 
@@ -123,12 +125,22 @@ body::-webkit-scrollbar-thumb:hover {
   margin: auto;
 }
 
-  main {
-    margin-left: 260px;
-    padding-bottom: 30px;
-    background: linear-gradient(57.94deg, #101c3b 55.84%, #071436 99.96%);
-    min-height: 100vh;
-  }
+main {
+  margin-left: 260px;
+  padding-bottom: 30px;
+  min-height: 100vh;
+  background: #040d2c;
+  background: 
+    radial-gradient(ellipse at 70% 30%, #040d2c 0%, #020617 105%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 113, 37, 0.02) 0px,
+      rgba(255, 113, 37, 0.02) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+}
+
 /* main {
   margin-left: 260px;
   padding-bottom: 30px;
@@ -201,22 +213,28 @@ body::-webkit-scrollbar-thumb:hover {
   height: 120px;
   width: 210px;
   padding: 21px 24px;
-  background-color: #071436;
   border-radius: 20px;
-  box-shadow: inset 1px 1px 2px #313755;
+}
+
+.card {
+  background: linear-gradient(135deg, rgba(35, 185, 183, 0.4), rgba(14, 95, 133, 0.3));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow:
+    inset 1px 1px 2px rgba(92, 241, 239, 0.377);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .cash-card {
   width: 250px;
   background-color: #ff712569;
-  border-radius: 20px;
   box-shadow: inset 1px 1px 2px #ff71258f;
 }
 
 .card p,
 .cash-card p {
   font: 400 14px 'Inter';
-  color: rgba(255, 255, 255, 0.308);
+  color: rgba(255, 255, 255, 0.508);
   /* margin-bottom: 24px; */
 }
 
@@ -352,17 +370,25 @@ body::-webkit-scrollbar-thumb:hover {
 
 /* chart */
 .chart-container {
-  background-color: #071230;
   padding: 31px 30px 10px 0px;
   border-radius: 20px;
   box-shadow: inset 1px 1px 2px #313755a6;
+  /* background: #061134; */
+  background: rgba(6, 17, 52, 0.6);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  position: relative;
 }
 
 .my-assets {
   padding: 20px 26px;
-  background-color: #071230;
+  /* background-color: #071230; */
   box-shadow: inset 1px 1px 2px #313755a6;
   border-radius: 20px;
+  background: rgba(6, 17, 52, 0.6);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .stock-header,
@@ -556,29 +582,33 @@ body::-webkit-scrollbar-thumb:hover {
 .liked-table-body {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 7px;
   height: 57vh;
   padding: 0 10px 0 0;
   overflow-y: scroll;
   border-radius: 10px;
 }
 
-.liked-table-body::-webkit-scrollbar,.all-table-body::-webkit-scrollbar {
+.liked-table-body::-webkit-scrollbar,
+.all-table-body::-webkit-scrollbar {
   width: 8px;
 }
 
-.liked-table-body::-webkit-scrollbar-track,.all-table-body::-webkit-scrollbar-track {
+.liked-table-body::-webkit-scrollbar-track,
+.all-table-body::-webkit-scrollbar-track {
   background: #1a2033;
   border-radius: 4px;
 }
 
-.liked-table-body::-webkit-scrollbar-thumb,.all-table-body::-webkit-scrollbar-thumb {
+.liked-table-body::-webkit-scrollbar-thumb,
+.all-table-body::-webkit-scrollbar-thumb {
   background-color: #444c66;
   border-radius: 4px;
   border: 1px solid #2a2f4a;
 }
 
-.liked-table-body::-webkit-scrollbar-thumb:hover,.all-table-body::-webkit-scrollbar-thumb:hover {
+.liked-table-body::-webkit-scrollbar-thumb:hover,
+.all-table-body::-webkit-scrollbar-thumb:hover {
   background-color: #5a6380;
 }
 
@@ -592,9 +622,12 @@ body::-webkit-scrollbar-thumb:hover {
 .liked-table-row div {
   font-size: 15px;
 }
-.liked-table-row > div:first-child, .liked-table-header > div:first-child{
+
+.liked-table-row>div:first-child,
+.liked-table-header>div:first-child {
   flex: 1.5;
 }
+
 .buy-button>p {
   cursor: pointer;
   margin: auto;
@@ -617,15 +650,17 @@ body::-webkit-scrollbar-thumb:hover {
   font: 400 16px 'Inter';
   padding: 18px 0;
 }
-.all-table-body{
+
+.all-table-body {
   height: 57vh;
   border-radius: 10px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 7px;
 }
-.stock-card{
+
+.stock-card {
   display: flex;
   justify-content: space-between;
   padding: 15px;
@@ -633,19 +668,21 @@ body::-webkit-scrollbar-thumb:hover {
   align-items: center;
   margin-right: 10px;
 }
-.stock-card h3{
+
+.stock-card h3 {
   font: 400 16px 'Inter';
   color: white;
   margin-bottom: 5px;
 }
-.stock-card p{
+
+.stock-card p {
   font: 400 14px 'Inter';
   color: #cccccc;
 }
 
 
 .gradient-1 {
-  background: linear-gradient(135deg, #23b9b7de,#0e5f85);
+  background: linear-gradient(135deg, #23b9b7de, #0e5f85);
 }
 
 .gradient-2 {
@@ -662,4 +699,19 @@ body::-webkit-scrollbar-thumb:hover {
 
 .gradient-5 {
   background: linear-gradient(135deg, rgba(255, 255, 0, 0.25), rgba(255, 100, 0, 0.2));
+}
+
+.chart-container::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #FF7125, transparent);
+  animation: scanline 3s linear infinite;
+}
+@keyframes scanline {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
 }
