@@ -19,6 +19,26 @@
   font-style: normal;
 }
 
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1a2033;
+  border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #444c66;
+  border-radius: 4px;
+  border: 1px solid #2a2f4a;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #5a6380;
+}
+
+
 .sidebar {
   width: 260px;
   height: 100vh;
@@ -103,21 +123,37 @@
   margin: auto;
 }
 
-main {
+  main {
+    margin-left: 260px;
+    padding-bottom: 30px;
+    background: linear-gradient(57.94deg, #101c3b 55.84%, #071436 99.96%);
+    min-height: 100vh;
+  }
+/* main {
   margin-left: 260px;
   padding-bottom: 30px;
-  background: linear-gradient(57.94deg, #101c3b 55.84%, #071436 99.96%);
+  min-height: 100vh;
 
-}
+  background-image: 
+    url('/src/assets/asfalt-light.png'), 
+    linear-gradient(57.94deg, #101c3b 55.84%, #071436 99.96%);
+    
+  background-blend-mode:overlay;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  color: white;
+} */
 
-.portfolio-header {
+.portfolio-header,
+.watchlist-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-top: 14px;
 }
 
-.portfolio-header h3 {
+.portfolio-header h3,
+.watchlist-header h3 {
   font: 400 30px 'Inter';
   color: white;
   letter-spacing: 1px;
@@ -146,7 +182,7 @@ main {
   border-radius: 50%;
 }
 
-.porftolio-cards > div:first-child {
+.porftolio-cards>div:first-child {
   display: flex;
   gap: 20px;
 }
@@ -157,7 +193,8 @@ main {
   justify-content: space-between;
 }
 
-.card,.cash-card {
+.card,
+.cash-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -172,30 +209,37 @@ main {
 .cash-card {
   width: 250px;
   background-color: #ff712569;
-  border-radius: 20px;  
+  border-radius: 20px;
   box-shadow: inset 1px 1px 2px #ff71258f;
 }
 
-.card p ,.cash-card p{
+.card p,
+.cash-card p {
   font: 400 14px 'Inter';
   color: rgba(255, 255, 255, 0.308);
   /* margin-bottom: 24px; */
 }
-.card h3,.cash-card h3 {
+
+.card h3,
+.cash-card h3 {
   font: 400 26px 'Inter';
   line-height: 26px;
   color: #DBBAA7;
 }
-.cash-card p,.cash-card h3{
-  color: #fff ;
+
+.cash-card p,
+.cash-card h3 {
+  color: #fff;
 }
-.cash-card div{
+
+.cash-card div {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font: 400 18px 'Inter';
 }
-.cash-button{
+
+.cash-button {
   cursor: pointer;
   padding: 10px 30px;
   border-radius: 20px;
@@ -203,31 +247,35 @@ main {
   color: white;
   transition: .3s;
 }
-.cash-button:hover{
+
+.cash-button:hover {
   background-color: #ff7125c0;
 }
+
 .title2 {
   font: 300 24px 'Inter';
   color: rgba(255, 255, 255, 0.795);
   margin: 24px 0;
 }
+
 /* modal */
-.modal-bg{
-  position:fixed;
+.modal-bg {
+  position: fixed;
   z-index: 2;
   align-content: center;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.604);
 }
-.modal-cash{
+
+.modal-cash {
   margin: auto;
   background-color: #1F243D;
   padding: 24px;
   width: 400px;
   border-radius: 16px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-  font-family:'Inter';
+  font-family: 'Inter';
 }
 
 .modal-title {
@@ -277,13 +325,14 @@ main {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition:  0.2s ease;
+  transition: 0.2s ease;
   font-family: 'Inter';
 }
 
 .btn-deposit:hover {
   background-color: #ff7125cc;
 }
+
 .modal-close {
   position: absolute;
   top: 12px;
@@ -317,12 +366,15 @@ main {
 }
 
 .stock-header,
-.stock-row {
+.stock-row,
+.liked-table-header,
+.liked-table-row {
   display: flex;
   justify-content: space-between;
 }
 
-.stock-header>div {
+.stock-header>div,
+.liked-table-header>div {
   font: 400 16px 'Inter';
   color: #5c647a;
 }
@@ -332,7 +384,9 @@ main {
 }
 
 .stock-header>div,
-.stock-row>div {
+.stock-row>div,
+.liked-table-header>div,
+.liked-table-row>div {
   flex: 1;
   text-align: center;
 }
@@ -342,7 +396,8 @@ main {
   overflow-y: scroll;
 }
 
-.stock-row div {
+.stock-row div,
+.liked-table-row div {
   font: 400 17px 'Inter';
   color: white;
 }
@@ -380,7 +435,7 @@ main {
 }
 
 .red {
-  color: #ff4d4d !important;
+  color: #ff7125 !important;
 }
 
 
@@ -388,17 +443,17 @@ main {
 
 /* Account */
 
-.account-head{
+.account-head {
   padding-top: 15px;
 }
 
-.account-head h3{
+.account-head h3 {
   font: 400 30px 'Inter';
   color: white;
   letter-spacing: 1px;
 }
 
-.account-card{
+.account-card {
   background-color: #071230;
   padding: 40px;
   border-radius: 20px;
@@ -406,40 +461,203 @@ main {
   margin-top: 40px
 }
 
-.account-logo-name{
-  display:flex;
+.account-logo-name {
+  display: flex;
   gap: 20px;
   align-items: center;
   margin-bottom: 20px
 }
 
-.account-logo{
+.account-logo {
   background-color: #3356AA;
   border-radius: 50%;
   padding: 9px 10px
 }
 
-.account-logo img{
+.account-logo img {
   width: 45px;
 }
 
-.account-detail h4{
+.account-detail h4 {
   font: 400 25px 'Inter';
   color: white;
   letter-spacing: 1px;
   margin-bottom: 5px
 }
 
-.account-detail p{
+.account-detail p {
   font: 400 14px 'Inter';
   color: rgba(255, 255, 255, 0.308);
 }
 
-.account-card button{
+.account-card button {
   background-color: #272D4E;
   border: none;
   border-radius: 6px;
   color: white;
   font: 400 12px 'Inter';
   padding: 6px 8px
+}
+
+/* watchlist */
+.watchlist>h4 {
+  color: rgba(255, 255, 255, 0.534);
+  font: 400 16px 'Inter';
+  margin-top: 20px;
+}
+
+.watchlist input {
+  outline: none;
+  color: white;
+  font: 400 15px 'Inter';
+  border: 1px solid #31375550;
+  background-color: #0712308f;
+  border-radius: 7px;
+  padding: 13px 40px;
+  width: 100%;
+}
+
+.input-box {
+  margin: 15px 0;
+  position: relative;
+}
+
+.input-box svg {
+  position: absolute;
+  left: 10px;
+  color: white;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.watchlist input::placeholder {
+  font: 400 15px 'Inter';
+  color: rgba(255, 255, 255, 0.534);
+}
+
+.watch-tables {
+  display: flex;
+  margin-top: 30px;
+  justify-content: space-between;
+}
+
+.liked-table {
+  width: 70%;
+  background-color: #071230;
+  border-radius: 10px;
+  padding: 0 10px 20px 20px;
+}
+
+.liked-table-header {
+  padding: 18px 15px;
+  margin-right: 20px;
+}
+
+.liked-table-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 57vh;
+  padding: 0 10px 0 0;
+  overflow-y: scroll;
+  border-radius: 10px;
+}
+
+.liked-table-body::-webkit-scrollbar,.all-table-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.liked-table-body::-webkit-scrollbar-track,.all-table-body::-webkit-scrollbar-track {
+  background: #1a2033;
+  border-radius: 4px;
+}
+
+.liked-table-body::-webkit-scrollbar-thumb,.all-table-body::-webkit-scrollbar-thumb {
+  background-color: #444c66;
+  border-radius: 4px;
+  border: 1px solid #2a2f4a;
+}
+
+.liked-table-body::-webkit-scrollbar-thumb:hover,.all-table-body::-webkit-scrollbar-thumb:hover {
+  background-color: #5a6380;
+}
+
+.liked-table-row {
+  padding: 12px 15px;
+  align-items: center;
+  background-color: #09183be3;
+  border-radius: 10px;
+}
+
+.liked-table-row div {
+  font-size: 15px;
+}
+
+.buy-button>p {
+  cursor: pointer;
+  margin: auto;
+  padding: 6px;
+  width: 60px;
+  border-radius: 7px;
+  background-color: #f56a20bd;
+}
+
+.all-table {
+  background-color: #071230;
+  border-radius: 10px;
+  padding: 0 10px 20px 20px;
+  width: 28%;
+}
+
+.all-table h4 {
+  /* color: #5c647a; */
+  color: rgba(255, 255, 255, 0.747);
+  font: 400 16px 'Inter';
+  padding: 18px 0;
+}
+.all-table-body{
+  height: 57vh;
+  border-radius: 10px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.stock-card{
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-radius: 7px;
+  align-items: center;
+  margin-right: 10px;
+}
+.stock-card h3{
+  font: 400 16px 'Inter';
+  color: white;
+  margin-bottom: 5px;
+}
+.stock-card p{
+  font: 400 14px 'Inter';
+  color: #cccccc;
+}
+
+
+.gradient-1 {
+  background: linear-gradient(135deg, #23b9b7de,#0e5f85);
+}
+
+.gradient-2 {
+  background: linear-gradient(135deg, rgba(255, 140, 0, 0.25), rgba(255, 0, 0, 0.2));
+}
+
+.gradient-3 {
+  background: linear-gradient(135deg, rgba(100, 255, 100, 0.25), rgba(0, 200, 100, 0.2));
+}
+
+.gradient-4 {
+  background: linear-gradient(135deg, rgba(140, 0, 255, 0.25), rgba(0, 100, 255, 0.2));
+}
+
+.gradient-5 {
+  background: linear-gradient(135deg, rgba(255, 255, 0, 0.25), rgba(255, 100, 0, 0.2));
 }
