@@ -520,7 +520,13 @@ main {
   border-radius: 6px;
   color: white;
   font: 400 12px 'Inter';
-  padding: 6px 8px
+  padding: 6px 8px;
+  cursor: pointer;
+  transition: .3s
+}
+
+.account-card button:hover{
+  background-color: #3B4371;
 }
 
 .settings{
