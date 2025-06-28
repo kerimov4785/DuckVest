@@ -30,7 +30,7 @@ function Sidebar({id}) {
                             <p>Watchlist</p>
                         </div>
                     </NavLink>
-                    <NavLink to={'/Achievments'}>
+                    <NavLink to={"/Achievements"}>
                         <div>
                             <Medal size={22} color='rgba(255, 255, 255,.4)' />
                             <p>Achievements</p>

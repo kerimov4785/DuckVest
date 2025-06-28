@@ -4,7 +4,7 @@ import Portfolio from "./pages/Portfolio"
 import { useEffect, useState } from "react"
 import Account from "./pages/Account"
 import Watchlist from "./pages/Watchlist"
-import Achievments from "./pages/Achievments"
+import Achievements from "./pages/Achievements"
 
 function App() {
   const id = 2
@@ -26,7 +26,7 @@ function App() {
             <Route path="/Portfolio" element={<Portfolio />} />
             <Route path={`/Account/${id}`} element={<Account investor={investor}/>} />
             <Route path="/Watchlist" element={<Watchlist id={id} />} />
-            <Route path="/Achievments" element={<Achievments />} />
+            <Route path="/Achievements" element={<Achievements/>}/>
           </Routes>
         </div>
       </main>
