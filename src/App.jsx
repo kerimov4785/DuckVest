@@ -7,7 +7,7 @@ import Watchlist from "./pages/Watchlist"
 import Achievements from "./pages/Achievements"
 
 function App() {
-  const id = 2
+  const id = 5
   let [investor, setInvestor] = useState()
   useEffect(() => {
     fetch(`http://localhost:4040/investors/get-account-information-id=${id}`)
