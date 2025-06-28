@@ -1,21 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router'
 
-function Account() {
+function Account({investor}) {
+
   return (
     <div>
       <div className="account-head">
         <h3>Account</h3>
         <div className="account-card">
-            <div className="account-logo-name">
-                <div className="account-logo">
-                    <img src="src/assets/logo.png" alt="" />
-                </div>
-                <div className="account-detail">
-                    <h4>Nihat Kerimov</h4>
-                    <p>nihatkerimov@gmail.com</p>
-                </div>
+          <div className="account-logo-name">
+            <div className="account-logo">
+              <img src="../src/assets/logo.png" alt="" />
             </div>
-            <button>Edit Profile</button>
+            <div className="account-detail">
+              <h4>{investor?.name}</h4>
+              <p>{investor?.email}</p>
+            </div>
+          </div>
+          <button>Edit Profile</button>
         </div>
       </div>
       <div className="settings">
@@ -23,17 +25,17 @@ function Account() {
         <div className="settings-card">
           <div className="setting-row">
             <h5>Email</h5>
-            <p>nihatkerimov@gmail.com</p>
+            <p>{investor?.email}</p>
           </div>
           <hr />
           <div className="setting-row">
             <h5>Password</h5>
-            <p style={{fontSize: "10px"}}>● ● ● ● ● ● ● ●</p>
+            <p style={{ fontSize: "10px" }}>● ● ● ● ● ● ● ●</p>
           </div>
           <hr />
           <div className="setting-row">
             <h5>Phone</h5>
-            <p>+1 234 567 8900</p>
+            <p>{investor?.phone}</p>
           </div>
           <hr />
           <div className="setting-row">
