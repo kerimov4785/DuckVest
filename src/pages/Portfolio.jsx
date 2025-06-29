@@ -3,8 +3,8 @@ import Card from '../components/Card'
 import Chart from '../components/Chart'
 import MyAssets from '../components/MyAssets';
 
-function Portfolio({investor,id}) {
-    
+function Portfolio({ investor, id ,setInvestor}) {
+
     function getRandomSortedNumbers(count, max) {
         const numbers = new Set();
         while (numbers.size < count) {
@@ -46,7 +46,9 @@ function Portfolio({investor,id}) {
     let [cashStatus, setCashStatus] = useState(false)
     let [dateValue, setDateValue] = useState('')
     let [inpValue, setInpValue] = useState('')
-    
+
+    console.log("val");
+
     function deposit() {
         setCashStatus(true)
     }
@@ -78,7 +80,15 @@ function Portfolio({investor,id}) {
                     <form className="modal-form" onSubmit={(e) => {
                         e.preventDefault();
                         setCashStatus(false)
+                        setInpValue(0)
                         fetch(`http://localhost:4040/bank/add-money-amount=${inpValue}-investorid=${id}`, { method: "POST" })
+                                .then(() => {
+                                    return fetch(`http://localhost:4040/investors/get-account-information-id=${id}`)  
+                                })
+                                .then(res => res.json())
+                                .then(data => setInvestor(data)
+                                )
+
                     }}>
                         <div className="form-group">
                             <label htmlFor="cardNumber">Card Number</label>
