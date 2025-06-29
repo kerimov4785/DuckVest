@@ -8,6 +8,7 @@ import Achievements from "./pages/Achievements"
 import MainLayout from "./layout/MainLayout"
 import AdminLayout from "./layout/AdminLayout"
 import Register from "./pages/Register"
+import Trade from "./pages/Trade"
 
 function App() {
   let [inp1, setInp1] = useState()
@@ -59,10 +60,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to={`/Register`} />} />
         <Route path="/" element={<MainLayout investor={investor} />} >
-          <Route path={`/Portfolio/:username`} element={<Portfolio id={id} investor={investor} />} />
-          <Route path={`/Account/:username`} element={<Account investor={investor} />} />
-          <Route path="/Watchlist" element={<Watchlist id={id} investor={investor} />} />
+          <Route path="/Portfolio/:username" element={<Portfolio id={id} investor={investor} />} />
+          <Route path="/Account/:username" element={<Account investor={investor} />} />
+          <Route path="/Watchlist/:username" element={<Watchlist id={id} investor={investor} />} />
           <Route path="/Achievements" element={<Achievements />} />
+          <Route path="/Trade" element={<Trade investor={investor} />} />
         </Route>
         <Route path="/Register" element={<AdminLayout />} >
           <Route index element={<Register error={error} setInp1={setInp1} setInp2={setInp2} login={login} />} />

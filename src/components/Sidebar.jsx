@@ -24,7 +24,7 @@ function Sidebar({investor}) {
                             <p>Account</p>
                         </div>
                     </NavLink>
-                    <NavLink to={'/Watchlist'}>
+                    <NavLink to={`/Watchlist/${investor?.username}`}>
                         <div>
                             <Star size={22} color='rgba(255, 255, 255,.4)'/>
                             <p>Watchlist</p>
@@ -34,6 +34,12 @@ function Sidebar({investor}) {
                         <div>
                             <Medal size={22} color='rgba(255, 255, 255,.4)' />
                             <p>Achievements</p>
+                        </div>
+                    </NavLink>
+                    <NavLink to={"/Trade"}>
+                        <div>
+                            <Medal size={22} color='rgba(255, 255, 255,.4)' />
+                            <p>Trade</p>
                         </div>
                     </NavLink>
                 </nav>
