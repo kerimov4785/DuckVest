@@ -10,6 +10,10 @@ import AdminLayout from "./layout/AdminLayout"
 import Register from "./pages/Register"
 
 function App() {
+  let [inp1, setInp1] = useState()
+  let [inp2, setInp2] = useState()
+  console.log(inp1, inp2);
+
   let [id, setId] = useState(localStorage['userId'] || '')
   let [investor, setInvestor] = useState()
   let [error, setError] = useState(false)
@@ -23,36 +27,45 @@ function App() {
       })
   }, []);
 
+
   const navigate = useNavigate();
+
+
   function login() {
-    fetch(`http://localhost:4040/investors/get-account-information-id=${id}`)
+    fetch(`http://localhost:4040/investors/login-user=${inp1}&pwd=${inp2}`, { method: 'POST' })
       .then(res => res.json())
-      .then(data => {
-        if (!data || !data.username) {
-          console.log('not found this mail')
-          setError(true)
+      .then(id => {
+        if (id.statusCode != 404) {
+          console.log(id);
+          setId(id)
+          fetch(`http://localhost:4040/investors/get-account-information-id=${id}`)
+            .then(res => res.json())
+            .then(data => {
+              setInvestor(data)
+              localStorage['userId'] = id
+              navigate(`/Portfolio/${data.username}`)
+            })
         }
         else {
-          setInvestor(data)
-          localStorage['userId'] = id
-          navigate(`/Portfolio/${data.username}`)
+          setError(true)
         }
-      })
+      }
+      )
   }
-  console.log(investor);
+  console.log(id);
 
   return (
     <>
       <Routes>
         <Route path="/" element={<Navigate to={`/Register`} />} />
         <Route path="/" element={<MainLayout investor={investor} />} >
-          <Route path={`/Portfolio/:username`} element={<Portfolio investor={investor} />} />
+          <Route path={`/Portfolio/:username`} element={<Portfolio id={id} investor={investor} />} />
           <Route path={`/Account/:username`} element={<Account investor={investor} />} />
           <Route path="/Watchlist" element={<Watchlist id={id} investor={investor} />} />
           <Route path="/Achievements" element={<Achievements />} />
         </Route>
         <Route path="/Register" element={<AdminLayout />} >
-          <Route index element={<Register error={error} investor={investor} setInvestor={setInvestor} setId={setId} login={login} />} />
+          <Route index element={<Register error={error} setInp1={setInp1} setInp2={setInp2} login={login} />} />
         </Route>
       </Routes>
     </>

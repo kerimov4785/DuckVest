@@ -3,7 +3,7 @@ import Card from '../components/Card'
 import Chart from '../components/Chart'
 import MyAssets from '../components/MyAssets';
 
-function Portfolio({investor}) {
+function Portfolio({investor,id}) {
     
     function getRandomSortedNumbers(count, max) {
         const numbers = new Set();
@@ -43,10 +43,10 @@ function Portfolio({investor}) {
         { title: "Today's Change", value: `+ $${last.card2}`, },
         { title: "Best Performing", value: `AAPL +${last.card3 / 10}%`, }
     ]
-    let [balance, setBalance] = useState(localStorage.getItem('bln') || 0)
     let [cashStatus, setCashStatus] = useState(false)
     let [dateValue, setDateValue] = useState('')
-    let inpValue = ''
+    let [inpValue, setInpValue] = useState('')
+    
     function deposit() {
         setCashStatus(true)
     }
@@ -78,8 +78,7 @@ function Portfolio({investor}) {
                     <form className="modal-form" onSubmit={(e) => {
                         e.preventDefault();
                         setCashStatus(false)
-                        localStorage.setItem('bln', +balance + +inpValue)
-                        setBalance(+balance + +inpValue)
+                        fetch(`http://localhost:4040/bank/add-money-amount=${inpValue}-investorid=${id}`, { method: "POST" })
                     }}>
                         <div className="form-group">
                             <label htmlFor="cardNumber">Card Number</label>
@@ -100,7 +99,7 @@ function Portfolio({investor}) {
 
                         <div className="form-group">
                             <label htmlFor="amount">Amount</label>
-                            <input type="number" id="amount" placeholder="$100.00" required onChange={(e) => inpValue = e.target.value} />
+                            <input type="number" id="amount" placeholder="$100.00" required onChange={(e) => setInpValue(e.target.value)} />
                         </div>
 
                         <button type="submit" className="btn-deposit">Deposit</button>
