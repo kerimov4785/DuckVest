@@ -7,8 +7,8 @@ import Watchlist from "./pages/Watchlist"
 import Achievements from "./pages/Achievements"
 
 function App() {
-  const id = 5
-  let [investor, setInvestor] = useState()
+  const id = 4
+  let [investor, setInvestor] = useState({})
   useEffect(() => {
     fetch(`http://localhost:4040/investors/get-account-information-id=${id}`)
       .then(res => res.json())
@@ -23,8 +23,8 @@ function App() {
       <main>
         <div className="container">
           <Routes>
-            <Route path="/Portfolio" element={<Portfolio />} />
-            <Route path={`/Account/${id}`} element={<Account investor={investor}/>} />
+            <Route path={`/Portfolio/:id`} element={<Portfolio investor={investor} />} />
+            <Route path={`/Account/:id`} element={<Account investor={investor}/>} />
             <Route path="/Watchlist" element={<Watchlist id={id} />} />
             <Route path="/Achievements" element={<Achievements/>}/>
           </Routes>

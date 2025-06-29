@@ -12,7 +12,7 @@ function Sidebar({id}) {
             <div className='menu'>
                 <h4>Menu</h4>
                 <nav>
-                    <NavLink to={'/Portfolio'}>
+                    <NavLink to={`/Portfolio/${id}`}>
                         <div>
                             <BriefcaseBusiness size={22} color='rgba(255, 255, 255,.4)' />
                             <p>Portfolio</p>    

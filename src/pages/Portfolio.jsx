@@ -3,7 +3,8 @@ import Card from '../components/Card'
 import Chart from '../components/Chart'
 import MyAssets from '../components/MyAssets';
 
-function Portfolio() {
+function Portfolio({investor}) {
+    
     function getRandomSortedNumbers(count, max) {
         const numbers = new Set();
         while (numbers.size < count) {
@@ -109,10 +110,10 @@ function Portfolio() {
             <div className='portfolio-header'>
                 <h3>Portfolio</h3>
                 <div className='person-info'>
-                    <img src="src/assets/react.svg" alt="" />
+                    <img src="../src/assets/react.svg" alt="" />
                     <div>
-                        <h5>Nihat Ker...</h5>
-                        <p>nihatkerimov@gmail.com</p>
+                        <h5>{investor?.username}</h5>
+                        <p>{investor?.email}</p>
                     </div>
                 </div>
             </div>
@@ -124,7 +125,7 @@ function Portfolio() {
                 <div className='cash-card'>
                     <p>Cash Balance</p>
                     <div>
-                        <h3>{balance}$</h3>
+                        <h3>{investor?.portfolioBalance}$</h3>
                         <div className='cash-button' onClick={() => deposit()}>Deposit</div>
                     </div>
                 </div>

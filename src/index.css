@@ -224,7 +224,8 @@ main {
 }
 
 .cash-card {
-  width: 250px;
+  width: max-content;
+  padding-inline:20px;
   background-color: #ff712569;
   box-shadow: inset 1px 1px 2px #ff71258f;
 }
@@ -242,7 +243,9 @@ main {
   line-height: 26px;
   color: #DBBAA7;
 }
-
+.cash-card h3{
+  margin-right: 10px;
+}
 .cash-card p,
 .cash-card h3 {
   color: #fff;
