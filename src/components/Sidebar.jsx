@@ -38,7 +38,7 @@ function Sidebar({investor}) {
                     </NavLink>
                     <NavLink to={"/Trade"}>
                         <div>
-                            <Medal size={22} color='rgba(255, 255, 255,.4)' />
+                            <ArrowLeftRight size={22} color='rgba(255, 255, 255,.4)' />
                             <p>Trade</p>
                         </div>
                     </NavLink>
