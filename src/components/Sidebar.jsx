@@ -6,7 +6,7 @@ function Sidebar({investor}) {
     return (
         <div className='sidebar'>
             <div>
-                <img src="../src/assets/duckk2.png" alt="" />
+                <img src="../src/assets/duckk3.png" alt="" />
                 <h3>DuckVest </h3>
             </div>
             <div className='menu'>

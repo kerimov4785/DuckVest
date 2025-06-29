@@ -54,8 +54,8 @@ body::-webkit-scrollbar-thumb:hover {
 
 
 .sidebar img {
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
 }
 
 .sidebar>div:first-child {
@@ -793,6 +793,7 @@ main {
 }
 
 .section h1 {
+  padding-top: 20px;
   font-size: 30px;
 }
 
