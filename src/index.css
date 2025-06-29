@@ -945,7 +945,7 @@ main {
   margin-top: 25px;
 }
 
-.dropdown-box {
+.dropdown-box , .buy-input-box > div{
   cursor: pointer;
   position: relative;
   width: 300px;
@@ -957,7 +957,7 @@ main {
   margin-top: 5px;
 }
 
-.dropdown-box p,.dropdown p{
+.dropdown-box p,.dropdown p ,.buy-input-box > div p{
   padding: 9px 10px;
 }
 
@@ -1008,9 +1008,13 @@ main {
 .trade-panel{
   margin-top: 30px;
   display: flex;
+  gap: 20px;
 }
-.info-panel {
+.info-panel{
   width: 400px;
+  height: min-content;
+}
+.info-panel,.buy-panel {
   border: 1px solid #152549a4;
   background: 
     linear-gradient(
@@ -1050,6 +1054,30 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.buy-panel{
+  width: 350px;
+}
+.buy-input-box{
+  margin-bottom: 20px;
+}
+.buy-input-box > p{
+  font: 300 15px 'Inter';
+  color: #ffffffce;
+}
+.buy-input-box input{
+  color: white;
+  padding:8px 10px;
+  font: 400 16px 'Inter';
+  outline: none;
+  border: 1px solid #152549a4;
+  background-color: rgba(10, 25, 61, 0.6);
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.buy-input-box input::placeholder{
+  font-size: 15px;
 }
 @keyframes scanline {
   0% {

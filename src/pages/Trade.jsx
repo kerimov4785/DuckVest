@@ -1,15 +1,31 @@
 import { ChevronDown } from 'lucide-react';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaDAndD } from 'react-icons/fa6';
 
-function Trade({ investor, allStock,selectedStock, setSelectedStock }) {
+function Trade({ investor, allStock, selectedStock, setSelectedStock }) {
+
+    let [totalAsk, setTotalAsk] = useState(0)
+    let [totalBid, setTotalBid] = useState(0)
+    let [broker, setBroker] = useState(0)
+    let [quantity, setQuantity] = useState(0)
+
     let [dropStatus, setDropStatus] = useState(false)
     console.log(selectedStock);
-    
+
     function selectStock(stock) {
         setSelectedStock(stock)
         setDropStatus(false)
+        changeModul(0)
     }
+
+    function changeModul(q) {
+        setQuantity(q)
+        let cena = q * selectedStock?.ask
+        setTotalAsk(cena)
+        setTotalBid(q * selectedStock?.bid)
+        setBroker(cena < 1000.0 && cena > 0 ? 2 : cena >= 1000.0 && cena <= 100000.0 ? cena * 0.002 : cena >= 100000.0 && cena <= 150000.0 ? cena * 0.0015 : cena * 0.001)
+    }
+
     return (
         <div className='Trade'>
             <div className='portfolio-header'>
@@ -42,7 +58,28 @@ function Trade({ investor, allStock,selectedStock, setSelectedStock }) {
                     <h1 className='price-box' ><span>Bid:</span> ${selectedStock?.bid}</h1>
                 </div>
                 <div className='buy-panel'>
-
+                    <div className="buy-input-box">
+                        <p>Quantity</p>
+                        <input type="text" value={quantity} placeholder='Quantity' onChange={(e) => changeModul(e.target.value)} />
+                    </div>
+                    <div className="buy-input-box">
+                        <p>Total Buy</p>
+                        <div>
+                            <p>${totalAsk}</p>
+                        </div>
+                    </div>
+                    <div className="buy-input-box">
+                        <p>Total Sell</p>
+                        <div>
+                            <p>${totalBid}</p>
+                        </div>
+                    </div>
+                    <div className="buy-input-box">
+                        <p>Broker Fee</p>
+                        <div>
+                            <p>${broker}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
