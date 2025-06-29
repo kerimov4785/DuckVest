@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     if (!id) return;
 
-    fetch(`http://localhost:4040/investors/get-account-information-id=${id}`)
+    fetch(`nget-account-information-id=${id}`)
       .then(res => res.json())
       .then(data => {
         setInvestor(data);
