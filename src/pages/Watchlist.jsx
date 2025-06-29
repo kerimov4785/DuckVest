@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import AllAssets from '../components/AllAssets'
 import LikedAssets from '../components/LikedAssets'
 
-function Watchlist({ id ,investor}) {
+function Watchlist({ id ,investor,allStock, setAllStock }) {
     const [stocks, setStocks] = useState([])
     let [jarr, letJarr] = useState([])
     useEffect(() => {
@@ -30,7 +30,7 @@ function Watchlist({ id ,investor}) {
             </div>
             <div className='watch-tables'>
                 <LikedAssets stocks={stocks} setStocks={setStocks} />
-                <AllAssets stocks={stocks} setStocks={setStocks} id={id} letJarr={letJarr} />
+                <AllAssets stocks={stocks} setStocks={setStocks} id={id} letJarr={letJarr} allStock={allStock} setAllStock={setAllStock} />
             </div>
         </div>
     )

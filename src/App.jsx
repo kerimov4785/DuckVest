@@ -11,6 +11,7 @@ import Register from "./pages/Register"
 import Trade from "./pages/Trade"
 
 function App() {
+  const [allStock, setAllStock] = useState([])
   let [inp1, setInp1] = useState()
   let [inp2, setInp2] = useState()
 
@@ -19,7 +20,13 @@ function App() {
 
   let [id, setId] = useState(localStorage['userId'] || '')
   let [investor, setInvestor] = useState()
+  let [selectedStock, setSelectedStock] = useState()
   let [error, setError] = useState(false)
+  useEffect(() => {
+    fetch('http://localhost:4040/stocks/all')
+      .then(res => res.json())
+      .then(data => {setAllStock(data) , setSelectedStock(data[0]) }) 
+  }, [])
   useEffect(() => {
     if (!id) return;
 
@@ -64,9 +71,9 @@ function App() {
         <Route path="/" element={<MainLayout investor={investor} />} >
           <Route path="/Portfolio/:username" element={<Portfolio id={id} investor={investor} setInvestor={setInvestor} />} />
           <Route path="/Account/:username" element={<Account investor={investor} />} />
-          <Route path="/Watchlist/:username" element={<Watchlist id={id} investor={investor} />} />
+          <Route path="/Watchlist/:username" element={<Watchlist id={id} investor={investor} allStock={allStock} />} />
           <Route path="/Achievements" element={<Achievements />} />
-          <Route path="/Trade" element={<Trade investor={investor}  /> }/>
+          <Route path="/Trade" element={<Trade investor={investor} allStock={allStock} setAllStock={setAllStock} setSelectedStock={setSelectedStock} selectedStock={selectedStock}/>} />
         </Route>
         <Route path="/Register" element={<AdminLayout />} >
           <Route index element={<Register error={error} setInp1={setInp1} setInp2={setInp2} login={login} />} />

@@ -2,13 +2,7 @@ import { Bookmark } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { FaBookmark, FaRegBookmark } from 'react-icons/fa6'
 
-function AllAssets({ stocks, id, letJarr }) {
-    const [allStock, setAllStock] = useState([])
-    useEffect(() => {
-        fetch('http://localhost:4040/stocks/all')
-            .then(res => res.json())
-            .then(data => setAllStock(data))
-    }, [])
+function AllAssets({ stocks, id, letJarr ,allStock, setAllStock}) {
     const toggleLike = (stockId) => {
         let obj = allStock.find(item => item.stockID == id)
         if (!stocks.find(item => item.stockID == stockId)) {
