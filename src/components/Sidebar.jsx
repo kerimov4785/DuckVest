@@ -2,7 +2,7 @@ import { ArrowLeftRight, BriefcaseBusiness, Medal, Star, User } from 'lucide-rea
 import React, { useState } from 'react'
 import { NavLink } from 'react-router'
 
-function Sidebar({id}) {
+function Sidebar({investor}) {
     return (
         <div className='sidebar'>
             <div>
@@ -12,13 +12,13 @@ function Sidebar({id}) {
             <div className='menu'>
                 <h4>Menu</h4>
                 <nav>
-                    <NavLink to={`/Portfolio/${id}`}>
+                    <NavLink to={`/Portfolio/${investor?.username}`}>
                         <div>
                             <BriefcaseBusiness size={22} color='rgba(255, 255, 255,.4)' />
                             <p>Portfolio</p>    
                         </div>
                     </NavLink>
-                    <NavLink to={`/Account/${id}`} >
+                    <NavLink to={`/Account/${investor?.username}`} >
                         <div>
                             <User size={22} color='rgba(255, 255, 255,.4)' />
                             <p>Account</p>

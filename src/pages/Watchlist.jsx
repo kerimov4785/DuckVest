@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import AllAssets from '../components/AllAssets'
 import LikedAssets from '../components/LikedAssets'
 
-function Watchlist({ id }) {
+function Watchlist({ id ,investor}) {
     const [stocks, setStocks] = useState([])
     let [jarr, letJarr] = useState([])
     useEffect(() => {
@@ -18,8 +18,8 @@ function Watchlist({ id }) {
                 <div className='person-info'>
                     <img src="src/assets/react.svg" alt="" />
                     <div>
-                        <h5>Nihat Ker...</h5>
-                        <p>nihatkerimov@gmail.com</p>
+                        <h5>{investor?.username}</h5>
+                        <p>{investor?.email}</p>
                     </div>
                 </div>
             </div>

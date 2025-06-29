@@ -129,7 +129,6 @@ main {
   margin-left: 260px;
   padding-bottom: 30px;
   min-height: 100vh;
-  background: #040d2c;
   background:
     radial-gradient(ellipse at 70% 30%, #040d2c 0%, #020617 105%),
     repeating-linear-gradient(45deg,
@@ -225,7 +224,7 @@ main {
 
 .cash-card {
   width: max-content;
-  padding-inline:20px;
+  padding-inline: 20px;
   background-color: #ff712569;
   box-shadow: inset 1px 1px 2px #ff71258f;
 }
@@ -243,9 +242,11 @@ main {
   line-height: 26px;
   color: #DBBAA7;
 }
-.cash-card h3{
+
+.cash-card h3 {
   margin-right: 10px;
 }
+
 .cash-card p,
 .cash-card h3 {
   color: #fff;
@@ -528,21 +529,21 @@ main {
   transition: .3s
 }
 
-.account-card button:hover{
+.account-card button:hover {
   background-color: #3B4371;
 }
 
-.settings{
+.settings {
   margin-top: 40px
 }
 
-.settings h4{
+.settings h4 {
   font: 400 25px 'Inter';
   color: white;
   letter-spacing: 1px;
 }
 
-.settings-card{
+.settings-card {
   background-color: #071230;
   padding: 20px 40px;
   border-radius: 20px;
@@ -550,25 +551,25 @@ main {
   margin-top: 20px
 }
 
-.settings-card hr{
+.settings-card hr {
   border: none;
   background-color: rgb(21, 34, 66);
   height: 1px
 }
 
-.setting-row{
+.setting-row {
   display: flex;
   gap: 220px;
   padding-block: 15px
 }
 
-.setting-row h5{
+.setting-row h5 {
   font: 400 14px 'Inter';
   color: rgba(255, 255, 255, 0.8);
   width: 150px
 }
 
-.setting-row p{
+.setting-row p {
   font: 400 14px 'Inter';
   color: white;
 }
@@ -588,15 +589,17 @@ main {
   outline: none;
   color: white;
   font: 400 15px 'Inter';
-  border:none;
+  border: none;
   background-color: rgba(8, 21, 55, 0.5);
   border-radius: 7px;
   padding: 13px 40px;
   width: 100%;
 }
-.watchlist input:focus{
-  border:1px solid rgba(255, 113, 37, 0.5) ;
+
+.watchlist input:focus {
+  border: 1px solid rgba(255, 113, 37, 0.5);
 }
+
 .input-box {
   margin: 15px 0;
   position: relative;
@@ -685,10 +688,12 @@ main {
 .liked-table-header>div:first-child {
   flex: 1.5;
 }
-.liked-table-body  .liked-table-row:last-child{
+
+.liked-table-body .liked-table-row:last-child {
   transition: .5s;
 }
-.empty-body{
+
+.empty-body {
   display: flex;
   justify-content: center;
   height: 100%;
@@ -698,6 +703,7 @@ main {
   text-transform: uppercase;
   font: 300 42px 'Inter';
 }
+
 .buy-button>p {
   cursor: pointer;
   margin: auto;
@@ -779,21 +785,24 @@ main {
 }
 
 /* achievecard */
-.section{
+.section {
   display: flex;
   flex-direction: column;
   gap: 50px;
   font-family: 'Inter';
 }
-.section h1{
+
+.section h1 {
   font-size: 30px;
 }
-.section-content{
+
+.section-content {
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
-.search{
+
+.search {
   background-color: #fff;
   padding: 10px;
   display: flex;
@@ -802,17 +811,20 @@ main {
   border-radius: 5px;
 
 }
-.search input{
+
+.search input {
   width: 100%;
   outline: none;
   border: none;
   font-size: 20px;
 }
-.search .icon{
+
+.search .icon {
   font-size: 20px;
   color: black;
 }
-.achCard{
+
+.achCard {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -824,23 +836,28 @@ main {
   background: linear-gradient(180deg, #0C485D 0%, #002C3B 100%);
   font-family: 'Inter';
 }
-.achCard h1{
+
+.achCard h1 {
   font-size: 28px;
   font-weight: 700;
 }
-.achCard h3{
+
+.achCard h3 {
   font-size: 18px;
   font-weight: 500;
   color: rgb(103, 205, 212);
 }
-.achCard img{
+
+.achCard img {
   width: 150px;
 }
-.pp{
+
+.pp {
   font-size: 19px;
   text-align: center;
 }
-.goal{
+
+.goal {
   display: flex;
   gap: 10px;
   background-color: rgb(35, 170, 180);
@@ -849,8 +866,67 @@ main {
   font-size: 15px;
   align-items: center;
 }
-.go{
+
+.go {
   font-size: 20px;
+}
+
+/* login */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background:
+    radial-gradient(ellipse at 50% 50%, #040d2c 0%, #020617 105%),
+    repeating-linear-gradient(45deg,
+      rgba(255, 113, 37, 0.02) 0px,
+      rgba(255, 113, 37, 0.02) 1px,
+      transparent 1px,
+      transparent 4px);
+}
+/* .login-panel{
+  display: flex;
+} */
+.login-panel h2{
+  font: 400 36px 'Inter';
+  text-align: center;
+  color: white;
+  margin-bottom: 22px;
+}
+.login-panel div{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.login-panel input{
+  padding: 13px 17px;
+  width: 290px;
+  color: white;
+  font: 400 16px 'Inter';
+  outline: none;
+  border: 1px solid #1d2f57a4;
+  background-color: #040d2c;
+  border-radius: 12px;
+}
+.login-panel input::placeholder{
+  color: rgba(255, 255, 255, 0.24);
+}
+.login-panel p{
+  cursor: pointer;
+  text-align: end;
+  margin: 12px 0;
+  font: 400 15px 'Inter';
+  color:#3f5c99 ;
+}
+.login-panel h4{
+  text-align: center;
+  font: 400 16px 'Inter';
+  color: white;
+  padding: 13px 17px;
+  background-color: #ff7125;
+  border-radius: 12px;
+  cursor: pointer;
 }
 
 @keyframes scanline {
@@ -862,6 +938,7 @@ main {
     transform: translateY(100%);
   }
 }
+
 @keyframes lastAsset {
   0% {
     opacity: 0;
