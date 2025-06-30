@@ -8,13 +8,11 @@ function AllAssets({ stocks, id, letJarr, allStock, setAllStock }) {
         if (!stocks.find(item => item.stockID == stockId)) {
             fetch(`http://localhost:4040/watchlist/add-stock=${stockId}-to-wl=${id}`, { method: "POST" })
                 .then(() => letJarr([...stocks, obj]))
-
+  
         }
         else {
             fetch(`http://localhost:4040/watchlist/rmv-stock=${stockId}-to-wl=${id}`, { method: "POST" })
-                .then(() =>
-                    letJarr(stocks.filter(item => item.stockID != id))
-                )
+                .then(() =>letJarr(stocks.filter(item => item.stockID != id)))
         }
     };
     return (
