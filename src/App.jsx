@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes, useNavigate } from "react-router"
+import axios from 'axios';
 import Sidebar from "./components/Sidebar"
 import Portfolio from "./pages/Portfolio"
 import { useEffect, useState } from "react"
@@ -15,45 +16,41 @@ function App() {
   let [inp1, setInp1] = useState()
   let [inp2, setInp2] = useState()
 
-
-  console.log(inp1, inp2);
-
   let [id, setId] = useState(localStorage['userId'] || '')
   let [investor, setInvestor] = useState()
   let [selectedStock, setSelectedStock] = useState()
   let [error, setError] = useState(false)
+
   useEffect(() => {
-    fetch('http://localhost:4040/stocks/all')
-      .then(res => res.json())
-      .then(data => {setAllStock(data) , setSelectedStock(data[0]) }) 
+    axios.get('http://localhost:4040/stocks/all')
+      .then(data => {
+        console.log(data.data)
+        , setAllStock(data.data), setSelectedStock(data.data[0])
+      })
   }, [])
+
   useEffect(() => {
     if (!id) return;
-
-    fetch(`http://localhost:4040/investors/get-account-information-id=${id}`)
-      .then(res => res.json())
+    axios.get(`http://localhost:4040/investors/get-account-information-id=${id}`)
       .then(data => {
-        setInvestor(data);
+        setInvestor(data.data), console.log(data.data)
       })
-  }, []);
-
+  }, [])
 
   const navigate = useNavigate();
 
-
   function login() {
-    fetch(`http://localhost:4040/investors/login-user=${inp1}&pwd=${inp2}`, { method: 'POST' })
-      .then(res => res.json())
-      .then(id => {
+    axios.post(`http://localhost:4040/investors/login-user=${inp1}&pwd=${inp2}`)
+      .then(item => {
+        const id = item.data
+        console.log(id)
         if (id.statusCode != 404) {
-          console.log(id);
           setId(id)
-          fetch(`http://localhost:4040/investors/get-account-information-id=${id}`)
-            .then(res => res.json())
+          axios.get(`http://localhost:4040/investors/get-account-information-id=${id}`)
             .then(data => {
-              setInvestor(data)
+              setInvestor(data.data)
               localStorage['userId'] = id
-              navigate(`/Portfolio/${data.username}`)
+              navigate(`/Portfolio/${data.data.username}`)
             })
         }
         else {
@@ -73,7 +70,7 @@ function App() {
           <Route path="/Account/:username" element={<Account investor={investor} />} />
           <Route path="/Watchlist/:username" element={<Watchlist id={id} investor={investor} allStock={allStock} />} />
           <Route path="/Achievements" element={<Achievements />} />
-          <Route path="/Trade" element={<Trade investor={investor} allStock={allStock} setAllStock={setAllStock} setSelectedStock={setSelectedStock} selectedStock={selectedStock}/>} />
+          <Route path="/Trade" element={<Trade investor={investor} allStock={allStock} setAllStock={setAllStock} setSelectedStock={setSelectedStock} selectedStock={selectedStock} />} />
         </Route>
         <Route path="/Register" element={<AdminLayout />} >
           <Route index element={<Register error={error} setInp1={setInp1} setInp2={setInp2} login={login} />} />
