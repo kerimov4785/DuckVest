@@ -60,7 +60,7 @@ function Trade({ investor, allStock, selectedStock, setSelectedStock }) {
                 <div className='buy-panel'>
                     <div className="buy-input-box">
                         <p>Quantity</p>
-                        <input type="text" value={quantity} placeholder='Quantity' onChange={(e) => changeModul(e.target.value)} />
+                        <input type="number" value={quantity} placeholder='Quantity' onChange={(e) => changeModul(e.target.value)} />
                     </div>
                     <div className="buy-input-box">
                         <p>Total Buy</p>
@@ -80,6 +80,7 @@ function Trade({ investor, allStock, selectedStock, setSelectedStock }) {
                             <p>${broker}</p>
                         </div>
                     </div>
+                    <div className='buy-sell-buttons'></div>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { Link, useParams } from 'react-router'
 
-function Account({investor}) {
+function Account({ investor }) {
 
   return (
     <div>
@@ -18,6 +18,9 @@ function Account({investor}) {
             </div>
           </div>
           <button>Edit Profile</button>
+          <Link to={'/'}>
+            <button style={{ marginLeft: '10px' }}>Log out</button>
+          </Link>
         </div>
       </div>
       <div className="settings">

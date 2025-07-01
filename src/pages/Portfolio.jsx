@@ -66,9 +66,6 @@ function Portfolio({ investor, id ,setInvestor}) {
         opacity: cashStatus ? 1 : 0,
         transition: '0.3s'
     }
-    // function inpValue(params) {
-
-    // }
     return (
         <div className='portfolio'>
             <div className='modal-bg' style={{ left: cashStatus ? '0' : '-100vw' }}>
@@ -78,9 +75,9 @@ function Portfolio({ investor, id ,setInvestor}) {
                     <h2 className="modal-title">Deposit Funds</h2>
 
                     <form className="modal-form" onSubmit={(e) => {
+                        setInpValue('')
                         e.preventDefault();
                         setCashStatus(false)
-                        setInpValue(0)
                         fetch(`http://localhost:4040/bank/add-money-amount=${inpValue}-investorid=${id}`, { method: "POST" })
                                 .then(() => {
                                     return fetch(`http://localhost:4040/investors/get-account-information-id=${id}`)  
@@ -109,7 +106,7 @@ function Portfolio({ investor, id ,setInvestor}) {
 
                         <div className="form-group">
                             <label htmlFor="amount">Amount</label>
-                            <input type="number" id="amount" placeholder="$100.00" required onChange={(e) => setInpValue(e.target.value)} />
+                            <input type="number" value={inpValue} id="amount" placeholder="$100.00" required onChange={(e) => setInpValue(e.target.value)} />
                         </div>
 
                         <button type="submit" className="btn-deposit">Deposit</button>

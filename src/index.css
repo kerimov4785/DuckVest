@@ -169,6 +169,7 @@ main {
 }
 
 .person-info {
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1009,9 +1010,10 @@ main {
   margin-top: 30px;
   display: flex;
   gap: 20px;
+  justify-content: space-between;
 }
 .info-panel{
-  width: 400px;
+  width: 60%;
   height: min-content;
 }
 .info-panel,.buy-panel {
@@ -1045,7 +1047,7 @@ main {
 
 .info-panel h3{
   font: 400 15px 'Inter';
-  color: rgba(92, 241, 239, 0.677);
+  color: #ff7125;
   margin: 15px 0;
 }
 .price-box{
@@ -1079,6 +1081,19 @@ main {
 .buy-input-box input::placeholder{
   font-size: 15px;
 }
+.buy-input-box div{
+  width: 100%;
+}
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* Chrome, Safari, Edge */
+  margin: 0;
+}
+
 @keyframes scanline {
   0% {
     transform: translateY(0);
