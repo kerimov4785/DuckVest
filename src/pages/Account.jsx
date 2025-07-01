@@ -29,8 +29,8 @@ function Account({ investor }) {
               <img src="../src/assets/logo.png" alt="" />
             </div>
             <div className="account-detail">
-              <h4>{investor?.name}</h4>
-              <p>{investor?.email}</p>
+              <h4>{investor.name}</h4>
+              <p>{investor.email}</p>
             </div>
           </div>
           <button onClick={handleEditToggle}>
@@ -56,7 +56,7 @@ function Account({ investor }) {
                 placeholder="Enter new email"
               />
             ) : (
-              <p>{investor?.email}</p>
+              <p>{investor.email}</p>
             )}
           </div>
           <hr />
@@ -88,7 +88,7 @@ function Account({ investor }) {
                 placeholder="Enter new phone number"
               />
             ) : (
-              <p>{investor?.phone}</p>
+              <p>{investor.phone}</p>
             )}
           </div>
           <hr />

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import AllAssets from '../components/AllAssets'
 import LikedAssets from '../components/LikedAssets'
 
-function Watchlist({ id ,investor,allStock, setAllStock }) {
+function Watchlist({ id ,investor,allStock }) {
     const [stocks, setStocks] = useState([])
     let [jarr, letJarr] = useState([])
     useEffect(() => {
@@ -18,8 +18,8 @@ function Watchlist({ id ,investor,allStock, setAllStock }) {
                 <div className='person-info'>
                     <img src="../src/assets/react.svg" alt="" />
                     <div>
-                        <h5>{investor?.username}</h5>
-                        <p>{investor?.email}</p>
+                        <h5>{investor.username}</h5>
+                        <p>{investor.email}</p>
                     </div>
                 </div>
             </div>
@@ -29,8 +29,8 @@ function Watchlist({ id ,investor,allStock, setAllStock }) {
                 <input type="text" placeholder='Search or filter assets...' />
             </div>
             <div className='watch-tables'>
-                <LikedAssets stocks={stocks} setStocks={setStocks} />
-                <AllAssets stocks={stocks} setStocks={setStocks} id={id} letJarr={letJarr} allStock={allStock} setAllStock={setAllStock} />
+                <LikedAssets stocks={stocks} />
+                <AllAssets stocks={stocks} id={id} letJarr={letJarr} allStock={allStock} />
             </div>
         </div>
     )

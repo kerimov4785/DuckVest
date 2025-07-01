@@ -15,7 +15,6 @@ function App() {
   const [allStock, setAllStock] = useState([])
   let [inp1, setInp1] = useState()
   let [inp2, setInp2] = useState()
-
   let [id, setId] = useState(localStorage['userId'] || '')
   let [investor, setInvestor] = useState()
   let [selectedStock, setSelectedStock] = useState()
@@ -25,7 +24,7 @@ function App() {
     axios.get('http://localhost:4040/stocks/all')
       .then(data => {
         setAllStock(data.data), setSelectedStock(data.data[0])
-      }) 
+      })
   }, [])
 
   useEffect(() => {
@@ -57,10 +56,10 @@ function App() {
       }
       )
   }
-    // if (!selectedStock ) {
-    //   return 'gozde biraz';
-    // }
-
+  if (!investor || !selectedStock) {
+    console.log('gozle')
+    return 'gozde biraz';
+  }
   return (
     <>
       <Routes>
@@ -70,7 +69,7 @@ function App() {
           <Route path="/Account/:username" element={<Account investor={investor} />} />
           <Route path="/Watchlist/:username" element={<Watchlist id={id} investor={investor} allStock={allStock} />} />
           <Route path="/Achievements" element={<Achievements investor={investor} />} />
-          <Route path="/Trade" element={<Trade investor={investor} allStock={allStock} setAllStock={setAllStock} setSelectedStock={setSelectedStock} selectedStock={selectedStock} />} />
+          <Route path="/Trade" element={<Trade investor={investor} id={id} allStock={allStock} setAllStock={setAllStock} setSelectedStock={setSelectedStock} selectedStock={selectedStock} />} />
         </Route>
         <Route path="/Login" element={<AdminLayout />} >
           <Route index element={<Register error={error} setInp1={setInp1} setInp2={setInp2} login={login} />} />

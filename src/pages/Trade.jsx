@@ -3,7 +3,7 @@ import { ChevronDown } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { FaDAndD } from 'react-icons/fa6';
 
-function Trade({ investor, allStock, selectedStock, setSelectedStock }) {
+function Trade({ investor,id, allStock, selectedStock, setSelectedStock }) {
 
     let [totalAsk, setTotalAsk] = useState(0)
     let [totalBid, setTotalBid] = useState(0)
@@ -25,9 +25,9 @@ function Trade({ investor, allStock, selectedStock, setSelectedStock }) {
     }
     function changeModul(q) {
         setQuantity(q)
-        let cena = q * selectedStock?.ask
+        let cena = q * selectedStock.ask
         setTotalAsk(cena)
-        setTotalBid(q * selectedStock?.bid)
+        setTotalBid(q * selectedStock.bid)
         setBroker(cena < 1000.0 && cena > 0 ? 2 : cena >= 1000.0 && cena <= 100000.0 ? cena * 0.002 : cena >= 100000.0 && cena <= 150000.0 ? cena * 0.0015 : cena * 0.001)
     }
     function formatTime(timeStr) {
@@ -38,6 +38,13 @@ function Trade({ investor, allStock, selectedStock, setSelectedStock }) {
             timeZone: 'UTC',
             hour12: false
         });
+    }
+    console.log(selectedStock);
+    
+    function buy(stockId,portfolioId,quantity) {
+        console.log(stockId,+portfolioId,+quantity)
+        axios.post(`http://localhost:4040/stocks/buy-stk=${stockId}-prtfl=${+portfolioId}-qnt=${+quantity}`)
+        .then(item => console.log(item.data))
     }
 
     if (!selectedExchange) {
@@ -51,15 +58,15 @@ function Trade({ investor, allStock, selectedStock, setSelectedStock }) {
                 <div className='person-info'>
                     <img src="../src/assets/react.svg" alt="" />
                     <div>
-                        <h5>{investor?.username}</h5>
-                        <p>{investor?.email}</p>
+                        <h5>{investor.username}</h5>
+                        <p>{investor.email}</p>
                     </div>
                 </div>
             </div>
             <p className='mini-title'>Select stock</p>
             <div className='dropdown-box'>
                 <div onClick={() => setDropStatus(true)}>
-                    <p >{selectedStock?.symbol}</p>
+                    <p >{selectedStock.symbol}</p>
                     <ChevronDown />
                 </div>
                 <div style={{ height: dropStatus ? '300px' : '0px', transition: '.4s ease-in', opacity: dropStatus ? 1 : 0 }} className='dropdown'>
@@ -68,16 +75,16 @@ function Trade({ investor, allStock, selectedStock, setSelectedStock }) {
             </div>
             <div className='trade-panel'>
                 <div className='info-panel'>
-                    <h1>{selectedStock?.symbol}</h1>
-                    <h4>{selectedStock?.companyName}</h4>
-                    <h3>{selectedStock?.stockExchangeSummaryDTO.name} • {selectedStock?.stockExchangeSummaryDTO.country}</h3>
+                    <h1>{selectedStock.symbol}</h1>
+                    <h4>{selectedStock.companyName}</h4>
+                    <h3>{selectedStock.stockExchangeSummaryDTO.name} • {selectedStock.stockExchangeSummaryDTO.country}</h3>
                     <div className="market-time">
                         <p>Market Open: <span>{formatTime(selectedExchange.openTime)} (GMT)</span></p>
                         <p>Market Close: <span>{formatTime(selectedExchange.closeTime)} (GMT)</span></p>
                     </div>
-                    <h1 className='price-box' id='price'><span>Price:</span> ${selectedStock?.price}</h1>
-                    <h1 className='price-box' ><span>Ask:</span> ${selectedStock?.ask}</h1>
-                    <h1 className='price-box' ><span>Bid:</span> ${selectedStock?.bid}</h1>
+                    <h1 className='price-box' id='price'><span>Price:</span> ${selectedStock.price}</h1>
+                    <h1 className='price-box' ><span>Ask:</span> ${selectedStock.ask}</h1>
+                    <h1 className='price-box' ><span>Bid:</span> ${selectedStock.bid}</h1>
                 </div>
                 <div className='buy-panel'>
                     <div className="buy-input-box">
@@ -102,11 +109,14 @@ function Trade({ investor, allStock, selectedStock, setSelectedStock }) {
                             <p>${broker}</p>
                         </div>
                     </div>
-                    <div className='buy-sell-buttons'></div>
+                    <div className='buy-sell-buttons'>
+                        <p onClick={() => buy(selectedStock.stockID,id,quantity)} >Buy</p>
+                        <p>Sell</p>
+                    </div>
                 </div>
             </div>
         </div>
-    )
+    )   
 }
 
 export default Trade

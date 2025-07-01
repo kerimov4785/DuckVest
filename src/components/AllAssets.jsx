@@ -2,13 +2,12 @@ import { Bookmark } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { FaBookmark, FaRegBookmark } from 'react-icons/fa6'
 
-function AllAssets({ stocks, id, letJarr, allStock, setAllStock }) {
+function AllAssets({ stocks, id, letJarr, allStock }) {
     const toggleLike = (stockId) => {
         let obj = allStock.find(item => item.stockID == id)
         if (!stocks.find(item => item.stockID == stockId)) {
             fetch(`http://localhost:4040/watchlist/add-stock=${stockId}-to-wl=${id}`, { method: "POST" })
                 .then(() => letJarr([...stocks, obj]))
-  
         }
         else {
             fetch(`http://localhost:4040/watchlist/rmv-stock=${stockId}-to-wl=${id}`, { method: "POST" })

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function LikedAssets({ stocks, setStocks }) {
+function LikedAssets({ stocks }) {
     return (
         <div className='liked-table'>
             <div className="liked-table-header">

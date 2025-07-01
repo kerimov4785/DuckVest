@@ -11,8 +11,8 @@ function Achievements({investor}) {
                 <div className='person-info'>
                     <img src="../src/assets/react.svg" alt="" />
                     <div>
-                        <h5>{investor?.username}</h5>
-                        <p>{investor?.email}</p>
+                        <h5>{investor.username}</h5>
+                        <p>{investor.email}</p>
                     </div>
                 </div>
             </div>
