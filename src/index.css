@@ -1010,7 +1010,6 @@ main {
   margin-top: 30px;
   display: flex;
   gap: 20px;
-  justify-content: space-between;
 }
 .info-panel{
   width: 60%;

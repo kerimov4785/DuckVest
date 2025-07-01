@@ -24,8 +24,7 @@ function App() {
   useEffect(() => {
     axios.get('http://localhost:4040/stocks/all')
       .then(data => {
-        console.log(data.data)
-        , setAllStock(data.data), setSelectedStock(data.data[0])
+        setAllStock(data.data), setSelectedStock(data.data[0])
       })
   }, [])
 
@@ -33,7 +32,7 @@ function App() {
     if (!id) return;
     axios.get(`http://localhost:4040/investors/get-account-information-id=${id}`)
       .then(data => {
-        setInvestor(data.data), console.log(data.data)
+        setInvestor(data.data)
       })
   }, [])
 
@@ -43,7 +42,6 @@ function App() {
     axios.post(`http://localhost:4040/investors/login-user=${inp1}&pwd=${inp2}`)
       .then(item => {
         const id = item.data
-        console.log(id)
         if (id.statusCode != 404) {
           setId(id)
           axios.get(`http://localhost:4040/investors/get-account-information-id=${id}`)
@@ -59,8 +57,6 @@ function App() {
       }
       )
   }
-  console.log(id);
-
   return (
     <>
       <Routes>
