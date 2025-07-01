@@ -80,6 +80,7 @@ function Trade({ investor, allStock, selectedStock, setSelectedStock }) {
                             <p>${broker}</p>
                         </div>
                     </div>
+                    <div className='buy-sell-buttons'></div>
                 </div>
             </div>
         </div>

@@ -1081,6 +1081,9 @@ main {
 .buy-input-box input::placeholder{
   font-size: 15px;
 }
+.buy-input-box div{
+  width: 100%;
+}
 input[type=number] {
   -moz-appearance: textfield; /* Firefox */
 }
