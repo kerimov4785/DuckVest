@@ -1,7 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router'
+import React, { useState } from 'react'
+import { Link } from 'react-router'
 
 function Account({ investor }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    phone: '',
+    country: '',
+  });
+
+  const handleEditToggle = () => {
+    setIsEditing(prev => !prev);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   return (
     <div>
@@ -17,33 +33,79 @@ function Account({ investor }) {
               <p>{investor?.email}</p>
             </div>
           </div>
-          <button>Edit Profile</button>
+          <button onClick={handleEditToggle}>
+            {isEditing ? 'Save' : 'Edit Profile'}
+          </button>
           <Link to={'/'}>
             <button style={{ marginLeft: '10px' }}>Log out</button>
           </Link>
         </div>
       </div>
+
       <div className="settings">
         <h4>Settings</h4>
         <div className="settings-card">
           <div className="setting-row">
             <h5>Email</h5>
-            <p>{investor?.email}</p>
+            {isEditing ? (
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter new email"
+              />
+            ) : (
+              <p>{investor?.email}</p>
+            )}
           </div>
           <hr />
+
           <div className="setting-row">
             <h5>Password</h5>
-            <p style={{ fontSize: "10px" }}>● ● ● ● ● ● ● ●</p>
+            {isEditing ? (
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter new password"
+              />
+            ) : (
+              <p style={{ fontSize: "10px" }}>● ● ● ● ● ● ● ●</p>
+            )}
           </div>
           <hr />
+
           <div className="setting-row">
             <h5>Phone</h5>
-            <p>{investor?.phone}</p>
+            {isEditing ? (
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Enter new phone number"
+              />
+            ) : (
+              <p>{investor?.phone}</p>
+            )}
           </div>
           <hr />
+
           <div className="setting-row">
             <h5>Country</h5>
-            <p>United States</p>
+            {isEditing ? (
+              <input
+                type="text"
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                placeholder="Enter country"
+              />
+            ) : (
+              <p>United States</p>
+            )}
           </div>
         </div>
       </div>
@@ -51,4 +113,4 @@ function Account({ investor }) {
   )
 }
 
-export default Account
+export default Account;
