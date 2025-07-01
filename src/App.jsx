@@ -64,15 +64,15 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Navigate to={`/Register`} />} />
+        <Route path="/" element={<Navigate to={`/Login`} />} />
         <Route path="/" element={<MainLayout investor={investor} />} >
           <Route path="/Portfolio/:username" element={<Portfolio id={id} investor={investor} setInvestor={setInvestor} />} />
           <Route path="/Account/:username" element={<Account investor={investor} />} />
           <Route path="/Watchlist/:username" element={<Watchlist id={id} investor={investor} allStock={allStock} />} />
-          <Route path="/Achievements" element={<Achievements />} />
+          <Route path="/Achievements" element={<Achievements investor={investor} />} />
           <Route path="/Trade" element={<Trade investor={investor} allStock={allStock} setAllStock={setAllStock} setSelectedStock={setSelectedStock} selectedStock={selectedStock} />} />
         </Route>
-        <Route path="/Register" element={<AdminLayout />} >
+        <Route path="/Login" element={<AdminLayout />} >
           <Route index element={<Register error={error} setInp1={setInp1} setInp2={setInp2} login={login} />} />
         </Route>
       </Routes>

@@ -66,9 +66,6 @@ function Portfolio({ investor, id ,setInvestor}) {
         opacity: cashStatus ? 1 : 0,
         transition: '0.3s'
     }
-    // function inpValue(params) {
-
-    // }
     return (
         <div className='portfolio'>
             <div className='modal-bg' style={{ left: cashStatus ? '0' : '-100vw' }}>
