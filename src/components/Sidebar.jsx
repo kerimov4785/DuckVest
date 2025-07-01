@@ -12,19 +12,19 @@ function Sidebar({investor}) {
             <div className='menu'>
                 <h4>Menu</h4>
                 <nav>
-                    <NavLink to={`/Portfolio/${investor?.username}`}>
+                    <NavLink to={`/Portfolio/${investor.username}`}>
                         <div>
                             <BriefcaseBusiness size={22} color='rgba(255, 255, 255,.4)' />
                             <p>Portfolio</p>    
                         </div>
                     </NavLink>
-                    <NavLink to={`/Account/${investor?.username}`} >
+                    <NavLink to={`/Account/${investor.username}`} >
                         <div>
                             <User size={22} color='rgba(255, 255, 255,.4)' />
                             <p>Account</p>
                         </div>
                     </NavLink>
-                    <NavLink to={`/Watchlist/${investor?.username}`}>
+                    <NavLink to={`/Watchlist/${investor.username}`}>
                         <div>
                             <Star size={22} color='rgba(255, 255, 255,.4)'/>
                             <p>Watchlist</p>

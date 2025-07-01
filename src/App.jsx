@@ -25,7 +25,7 @@ function App() {
     axios.get('http://localhost:4040/stocks/all')
       .then(data => {
         setAllStock(data.data), setSelectedStock(data.data[0])
-      })
+      }) 
   }, [])
 
   useEffect(() => {
@@ -57,6 +57,10 @@ function App() {
       }
       )
   }
+    // if (!selectedStock ) {
+    //   return 'gozde biraz';
+    // }
+
   return (
     <>
       <Routes>

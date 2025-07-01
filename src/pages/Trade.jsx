@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { ChevronDown } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { FaDAndD } from 'react-icons/fa6';
@@ -8,22 +9,39 @@ function Trade({ investor, allStock, selectedStock, setSelectedStock }) {
     let [totalBid, setTotalBid] = useState(0)
     let [broker, setBroker] = useState(0)
     let [quantity, setQuantity] = useState(0)
-
     let [dropStatus, setDropStatus] = useState(false)
-    console.log(selectedStock);
+    let [selectedExchange, setSelectedExchange] = useState(null)
+
+    useEffect(() => {
+        axios.get(`http://localhost:4040/exchanges/get-id=${selectedStock.stockExchangeSummaryDTO.id}`)
+            .then(item => (setSelectedExchange(item.data)
+            ))
+    }, [selectedStock])
 
     function selectStock(stock) {
         setSelectedStock(stock)
         setDropStatus(false)
         changeModul(0)
     }
-
     function changeModul(q) {
         setQuantity(q)
         let cena = q * selectedStock?.ask
         setTotalAsk(cena)
         setTotalBid(q * selectedStock?.bid)
         setBroker(cena < 1000.0 && cena > 0 ? 2 : cena >= 1000.0 && cena <= 100000.0 ? cena * 0.002 : cena >= 100000.0 && cena <= 150000.0 ? cena * 0.0015 : cena * 0.001)
+    }
+    function formatTime(timeStr) {
+        const date = new Date(timeStr);
+        return date.toLocaleTimeString('en-GB', {
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZone: 'UTC',
+            hour12: false
+        });
+    }
+
+    if (!selectedExchange) {
+        return 
     }
 
     return (
@@ -53,6 +71,10 @@ function Trade({ investor, allStock, selectedStock, setSelectedStock }) {
                     <h1>{selectedStock?.symbol}</h1>
                     <h4>{selectedStock?.companyName}</h4>
                     <h3>{selectedStock?.stockExchangeSummaryDTO.name} • {selectedStock?.stockExchangeSummaryDTO.country}</h3>
+                    <div className="market-time">
+                        <p>Market Open: <span>{formatTime(selectedExchange.openTime)} (GMT)</span></p>
+                        <p>Market Close: <span>{formatTime(selectedExchange.closeTime)} (GMT)</span></p>
+                    </div>
                     <h1 className='price-box' id='price'><span>Price:</span> ${selectedStock?.price}</h1>
                     <h1 className='price-box' ><span>Ask:</span> ${selectedStock?.ask}</h1>
                     <h1 className='price-box' ><span>Bid:</span> ${selectedStock?.bid}</h1>

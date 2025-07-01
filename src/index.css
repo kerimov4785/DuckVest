@@ -19,6 +19,12 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Inter';
+  src: url('./Fonts/Inter/static/Inter_28pt-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
 body::-webkit-scrollbar {
   width: 8px;
 }
@@ -1031,7 +1037,7 @@ main {
     0 5px 22px rgba(0, 0, 0, 0.2); 
 }
 .info-panel h1:first-child{
-  font: 400 28px 'Inter';
+  font: 500 28px 'Inter';
   color: white;
   margin-bottom: 5px;
 }
@@ -1047,7 +1053,24 @@ main {
 .info-panel h3{
   font: 400 15px 'Inter';
   color: #ff7125;
-  margin: 15px 0;
+  margin: 10px 0 15px;
+}
+.market-time {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px;
+  border-radius: 8px;
+  font: 300 14px 'Inter';
+  color: #b7c4db;
+  margin-bottom: 10px;
+}
+
+.market-time p {
+  margin: 3px 0;
+}
+
+.market-time span {
+  font-weight: 500;
+  color: #ffffff;
 }
 .price-box{
   font: 300 28px 'Inter';
