@@ -1123,6 +1123,10 @@ main {
 
 .buy-sell-buttons p:first-child {
   background: #0e5f85;
+  transition: .3s;
+}
+.buy-sell-buttons p:first-child:hover {
+  background: #36afe7;
 }
 
 .buy-sell-buttons p:last-child{

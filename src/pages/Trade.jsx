@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { ChevronDown } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast';
 import { FaDAndD } from 'react-icons/fa6';
 
-function Trade({ investor,id, allStock, selectedStock, setSelectedStock }) {
+function Trade({ investor, id, allStock, selectedStock, setSelectedStock }) {
 
     let [totalAsk, setTotalAsk] = useState(0)
     let [totalBid, setTotalBid] = useState(0)
@@ -40,15 +41,23 @@ function Trade({ investor,id, allStock, selectedStock, setSelectedStock }) {
         });
     }
     console.log(selectedStock);
-    
-    function buy(stockId,portfolioId,quantity) {
-        console.log(stockId,+portfolioId,+quantity)
+
+    function buy(stockId, portfolioId, quantity) {
+        console.log(stockId, +portfolioId, +quantity)
         axios.post(`http://localhost:4040/stocks/buy-stk=${stockId}-prtfl=${+portfolioId}-qnt=${+quantity}`)
-        .then(item => console.log(item.data))
+            .then(item => {
+                console.log(item.data);
+                if (item.data.orderStatus == "COMPLETED") {
+                    toast.success(item.data.orderMessage)
+                }
+                else if(item.data.orderStatus == "CANCELLED"){
+                    toast.error(item.data.orderMessage)
+                }
+            })
     }
 
     if (!selectedExchange) {
-        return 
+        return
     }
 
     return (
@@ -110,13 +119,13 @@ function Trade({ investor,id, allStock, selectedStock, setSelectedStock }) {
                         </div>
                     </div>
                     <div className='buy-sell-buttons'>
-                        <p onClick={() => buy(selectedStock.stockID,id,quantity)} >Buy</p>
+                        <p onClick={() => buy(selectedStock.stockID, id, quantity)} >Buy</p>
                         <p>Sell</p>
                     </div>
                 </div>
             </div>
         </div>
-    )   
+    )
 }
 
 export default Trade

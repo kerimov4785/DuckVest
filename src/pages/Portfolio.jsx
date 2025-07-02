@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Card from '../components/Card'
 import Chart from '../components/Chart'
 import MyAssets from '../components/MyAssets';
+import axios from 'axios';
 
-function Portfolio({ investor, id ,setInvestor}) {
+function Portfolio({ portfolio, investor, id, setInvestor }) {
 
     function getRandomSortedNumbers(count, max) {
         const numbers = new Set();
@@ -18,9 +19,10 @@ function Portfolio({ investor, id ,setInvestor}) {
         card2: 0,
         card3: 0
     });
+    let [animation,setAnim] = useState(true)
     useEffect(() => {
-        const result = getRandomSortedNumbers(59, 90000);
-        result.push(90000);
+        const result = getRandomSortedNumbers(59, investor.portfolioBalance);
+        result.push(investor.portfolioBalance);
         const result2 = getRandomSortedNumbers(59, 120);
         result2.push(120);
         const result3 = getRandomSortedNumbers(59, 150);
@@ -28,18 +30,27 @@ function Portfolio({ investor, id ,setInvestor}) {
 
         function update(step) {
             if (step <= 59) {
-                setLast({
-                    card1: result[step],
-                    card2: result2[step],
-                    card3: result3[step]
-                });
-                setTimeout(() => update(step + 1), 30);
+                if (animation) {
+                    setLast({
+                        card1: result[step],
+                        card2: result2[step],
+                        card3: result3[step]
+                    });
+                    setTimeout(() => update(step + 1), 30);
+                }
+                else {
+                    setLast({
+                        card1: result[59],
+                        card2: result2[59],
+                        card3: result3[59]
+                    });
+                }
             }
         };
         update(0);
-    }, []);
+    }, [investor]);
     let a = [
-        { title: "Total value", value: `$${last.card1}`, },
+        { title: "Total value", value: `$${last.card1}`.slice(0,8), },
         { title: "Today's Change", value: `+ $${last.card2}`, },
         { title: "Best Performing", value: `AAPL +${last.card3 / 10}%`, }
     ]
@@ -79,12 +90,13 @@ function Portfolio({ investor, id ,setInvestor}) {
                         e.preventDefault();
                         setCashStatus(false)
                         fetch(`http://localhost:4040/bank/add-money-amount=${inpValue}-investorid=${id}`, { method: "POST" })
-                                .then(() => {
-                                    return fetch(`http://localhost:4040/investors/get-account-information-id=${id}`)  
-                                })
-                                .then(res => res.json())
-                                .then(data => setInvestor(data)
-                                )
+                            .then(() => {
+                                return fetch(`http://localhost:4040/investors/get-account-information-id=${id}`)
+                            })
+                            .then(res => res.json())
+                            .then(data => (setAnim(false),setInvestor(data), console.log(data)
+                            )
+                            )
 
                     }}>
                         <div className="form-group">
@@ -131,7 +143,7 @@ function Portfolio({ investor, id ,setInvestor}) {
                 <div className='cash-card'>
                     <p>Cash Balance</p>
                     <div>
-                        <h3>{investor.portfolioBalance}$</h3>
+                        <h3>{`${investor.buyingPower}`.slice(0, 7)}$</h3>
                         <div className='cash-button' onClick={() => deposit()}>Deposit</div>
                     </div>
                 </div>

@@ -10,15 +10,21 @@ import MainLayout from "./layout/MainLayout"
 import AdminLayout from "./layout/AdminLayout"
 import Register from "./pages/Register"
 import Trade from "./pages/Trade"
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [allStock, setAllStock] = useState([])
   let [inp1, setInp1] = useState()
   let [inp2, setInp2] = useState()
-  let [id, setId] = useState(localStorage['userId'] || '')
+  let [id, setId] = useState(localStorage['userId'] || 1)
   let [investor, setInvestor] = useState()
   let [selectedStock, setSelectedStock] = useState()
   let [error, setError] = useState(false)
+  let [portfolio, setPortfolio] = useState()
+  useEffect(() => {
+    axios.get(`http://localhost:4040/portfolios/get-id=${id}`)
+      .then(data => setPortfolio(data.data))
+  }, [])
 
   useEffect(() => {
     axios.get('http://localhost:4040/stocks/all')
@@ -56,16 +62,34 @@ function App() {
       }
       )
   }
-  if (!investor || !selectedStock) {
+  if (!investor || !selectedStock || !portfolio) {
     console.log('gozle')
     return 'gozde biraz';
   }
   return (
     <>
+      <Toaster position="top-right" reverseOrder={false}
+        toastOptions={{
+          duration: 1500,
+          style: {
+            font: '400 16px "Inter"',
+            background: '#333',
+            color: '#fff',
+          },
+          success: {
+            icon: '✅',
+          },
+          error: {
+            icon: '❌',
+            style: {
+              background: 'red',
+            },
+          },
+        }} />
       <Routes>
         <Route path="/" element={<Navigate to={`/Login`} />} />
         <Route path="/" element={<MainLayout investor={investor} />} >
-          <Route path="/Portfolio/:username" element={<Portfolio id={id} investor={investor} setInvestor={setInvestor} />} />
+          <Route path="/Portfolio/:username" element={<Portfolio portfolio={portfolio} id={id} investor={investor} setInvestor={setInvestor} />} />
           <Route path="/Account/:username" element={<Account investor={investor} />} />
           <Route path="/Watchlist/:username" element={<Watchlist id={id} investor={investor} allStock={allStock} />} />
           <Route path="/Achievements" element={<Achievements investor={investor} />} />
