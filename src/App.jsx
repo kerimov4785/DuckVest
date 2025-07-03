@@ -2,7 +2,7 @@ import { Navigate, Route, Routes, useNavigate } from "react-router"
 import axios from 'axios';
 import Sidebar from "./components/Sidebar"
 import Portfolio from "./pages/Portfolio"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Account from "./pages/Account"
 import Watchlist from "./pages/Watchlist"
 import Achievements from "./pages/Achievements"
@@ -11,56 +11,37 @@ import AdminLayout from "./layout/AdminLayout"
 import Register from "./pages/Register"
 import Trade from "./pages/Trade"
 import { Toaster } from "react-hot-toast";
+import { DataContext } from "./DataContext/Context";
 
 function App() {
-  const [allStock, setAllStock] = useState([])
   let [inp1, setInp1] = useState()
   let [inp2, setInp2] = useState()
-  let [id, setId] = useState(localStorage['userId'] || 1)
-  let [investor, setInvestor] = useState()
-  let [selectedStock, setSelectedStock] = useState()
   let [error, setError] = useState(false)
-  let [portfolio, setPortfolio] = useState()
-  useEffect(() => {
-    axios.get(`http://localhost:4040/portfolios/get-id=${id}`)
-      .then(data => setPortfolio(data.data))
-  }, [])
-
-  useEffect(() => {
-    axios.get('http://localhost:4040/stocks/all')
-      .then(data => {
-        setAllStock(data.data), setSelectedStock(data.data[0])
-      })
-  }, [])
-
-  useEffect(() => {
-    if (!id) return;
-    axios.get(`http://localhost:4040/investors/get-account-information-id=${id}`)
-      .then(data => {
-        setInvestor(data.data)
-      })
-  }, [])
+  let {portfolio,setPortfolio,id,setId,selectedStock,setSelectedStock,allStock,setAllStock,investor, setInvestor} = useContext(DataContext)
 
   const navigate = useNavigate();
-
+  function sell(id) {
+    setSelectedStock(allStock.find(item => item.stockID == id))
+    navigate("/Trade")
+  }
   function login() {
+    if (!inp1 || !inp2) {
+      setError(true)
+      return
+    }
     axios.post(`http://localhost:4040/investors/login-user=${inp1}&pwd=${inp2}`)
       .then(item => {
         const id = item.data
-        if (id.statusCode != 404) {
-          setId(id)
-          axios.get(`http://localhost:4040/investors/get-account-information-id=${id}`)
+        if (item.data.statusCode != 404) {
+          setId(item.data)
+          localStorage['userId'] = item.data
+          axios.get(`http://localhost:4040/investors/get-account-information-id=${item.data}`)
             .then(data => {
               setInvestor(data.data)
-              localStorage['userId'] = id
               navigate(`/Portfolio/${data.data.username}`)
             })
         }
-        else {
-          setError(true)
-        }
-      }
-      )
+      }).catch(() => setError(true))
   }
   if (!investor || !selectedStock || !portfolio) {
     console.log('gozle')
@@ -89,11 +70,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to={`/Login`} />} />
         <Route path="/" element={<MainLayout investor={investor} />} >
-          <Route path="/Portfolio/:username" element={<Portfolio portfolio={portfolio} id={id} investor={investor} setInvestor={setInvestor} />} />
-          <Route path="/Account/:username" element={<Account investor={investor} />} />
-          <Route path="/Watchlist/:username" element={<Watchlist id={id} investor={investor} allStock={allStock} />} />
-          <Route path="/Achievements" element={<Achievements investor={investor} />} />
-          <Route path="/Trade" element={<Trade investor={investor} id={id} allStock={allStock} setAllStock={setAllStock} setSelectedStock={setSelectedStock} selectedStock={selectedStock} />} />
+          <Route path="/Portfolio/:username" element={<Portfolio sell={sell} />} />
+          <Route path="/Account/:username" element={<Account />} />
+          <Route path="/Watchlist/:username" element={<Watchlist sell={sell} />} />
+          <Route path="/Achievements" element={<Achievements />} />
+          <Route path="/Trade" element={<Trade/>} />
         </Route>
         <Route path="/Login" element={<AdminLayout />} >
           <Route index element={<Register error={error} setInp1={setInp1} setInp2={setInp2} login={login} />} />

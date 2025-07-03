@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Card from '../components/Card'
 import Chart from '../components/Chart'
 import MyAssets from '../components/MyAssets';
 import axios from 'axios';
-
-function Portfolio({ portfolio, investor, id, setInvestor }) {
-
+import { DataContext } from '../DataContext/Context';
+function Portfolio({ sell }) {
+    let { portfolio, investor, id, setInvestor } = useContext(DataContext)
     function getRandomSortedNumbers(count, max) {
         const numbers = new Set();
         while (numbers.size < count) {
@@ -19,15 +19,14 @@ function Portfolio({ portfolio, investor, id, setInvestor }) {
         card2: 0,
         card3: 0
     });
-    let [animation,setAnim] = useState(true)
+    let [animation, setAnim] = useState(true)
     useEffect(() => {
-        const result = getRandomSortedNumbers(59, investor.portfolioBalance);
-        result.push(investor.portfolioBalance);
+        const result = getRandomSortedNumbers(59, investor.buyingPower);
+        result.push(investor.buyingPower);
         const result2 = getRandomSortedNumbers(59, 120);
         result2.push(120);
         const result3 = getRandomSortedNumbers(59, 150);
         result3.push(150);
-
         function update(step) {
             if (step <= 59) {
                 if (animation) {
@@ -48,18 +47,15 @@ function Portfolio({ portfolio, investor, id, setInvestor }) {
             }
         };
         update(0);
-    }, [investor]);
+    }, [portfolio]);
     let a = [
-        { title: "Total value", value: `$${last.card1}`.slice(0,8), },
+        { title: "Total value", value: `$${last.card1}`.slice(0, 8), },
         { title: "Today's Change", value: `+ $${last.card2}`, },
         { title: "Best Performing", value: `AAPL +${last.card3 / 10}%`, }
     ]
     let [cashStatus, setCashStatus] = useState(false)
     let [dateValue, setDateValue] = useState('')
     let [inpValue, setInpValue] = useState('')
-
-    console.log("val");
-
     function deposit() {
         setCashStatus(true)
     }
@@ -77,6 +73,7 @@ function Portfolio({ portfolio, investor, id, setInvestor }) {
         opacity: cashStatus ? 1 : 0,
         transition: '0.3s'
     }
+
     return (
         <div className='portfolio'>
             <div className='modal-bg' style={{ left: cashStatus ? '0' : '-100vw' }}>
@@ -89,15 +86,18 @@ function Portfolio({ portfolio, investor, id, setInvestor }) {
                         setInpValue('')
                         e.preventDefault();
                         setCashStatus(false)
-                        fetch(`http://localhost:4040/bank/add-money-amount=${inpValue}-investorid=${id}`, { method: "POST" })
+                        axios.post(`http://localhost:4040/bank/add-money-amount=${inpValue}-investorid=${id}`)
                             .then(() => {
-                                return fetch(`http://localhost:4040/investors/get-account-information-id=${id}`)
+                                return axios.get(`http://localhost:4040/investors/get-account-information-id=${id}`);
                             })
-                            .then(res => res.json())
-                            .then(data => (setAnim(false),setInvestor(data), console.log(data)
-                            )
-                            )
-
+                            .then(data => {
+                                setAnim(false);
+                                setInvestor(data.data);
+                                console.log(data.data);
+                            })
+                            .catch(err => {
+                                console.error("Ошибка в запросах:", err);
+                            });
                     }}>
                         <div className="form-group">
                             <label htmlFor="cardNumber">Card Number</label>
@@ -151,7 +151,7 @@ function Portfolio({ portfolio, investor, id, setInvestor }) {
             <h4 className='title2'>Portfolio Performance</h4>
             <Chart />
             <h4 className='title2'>My Assets</h4>
-            <MyAssets />
+            <MyAssets sell={sell} />
         </div>
     )
 }

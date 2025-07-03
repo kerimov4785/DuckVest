@@ -1,11 +1,13 @@
 import { Search } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AllAssets from '../components/AllAssets'
 import LikedAssets from '../components/LikedAssets'
+import { DataContext } from '../DataContext/Context'
 
-function Watchlist({ id ,investor,allStock }) {
+function Watchlist({sell}) {
     const [stocks, setStocks] = useState([])
     let [jarr, letJarr] = useState([])
+    let {id ,investor,allStock} = useContext(DataContext)
     useEffect(() => {
         fetch(`http://localhost:4040/watchlist/get-wl=${id}`)
             .then(res => res.json())
@@ -29,8 +31,8 @@ function Watchlist({ id ,investor,allStock }) {
                 <input type="text" placeholder='Search or filter assets...' />
             </div>
             <div className='watch-tables'>
-                <LikedAssets stocks={stocks} />
-                <AllAssets stocks={stocks} id={id} letJarr={letJarr} allStock={allStock} />
+                <LikedAssets sell={sell} stocks={stocks} />
+                <AllAssets stocks={stocks} letJarr={letJarr}/>
             </div>
         </div>
     )

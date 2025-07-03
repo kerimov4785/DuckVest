@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router'
+import { DataContext } from '../DataContext/Context';
 
-function Account({ investor }) {
+function Account() {
+  let { investor } = useContext(DataContext)
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     email: '',

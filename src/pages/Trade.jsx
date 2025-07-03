@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { ChevronDown } from 'lucide-react';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
-import { FaDAndD } from 'react-icons/fa6';
+import { DataContext } from '../DataContext/Context';
 
-function Trade({ investor, id, allStock, selectedStock, setSelectedStock }) {
-
+function Trade() {
+    let { investor, id, allStock, selectedStock, setSelectedStock } = useContext(DataContext)
     let [totalAsk, setTotalAsk] = useState(0)
     let [totalBid, setTotalBid] = useState(0)
     let [broker, setBroker] = useState(0)
@@ -40,20 +40,39 @@ function Trade({ investor, id, allStock, selectedStock, setSelectedStock }) {
             hour12: false
         });
     }
-    console.log(selectedStock);
-
     function buy(stockId, portfolioId, quantity) {
-        console.log(stockId, +portfolioId, +quantity)
-        axios.post(`http://localhost:4040/stocks/buy-stk=${stockId}-prtfl=${+portfolioId}-qnt=${+quantity}`)
-            .then(item => {
-                console.log(item.data);
-                if (item.data.orderStatus == "COMPLETED") {
-                    toast.success(item.data.orderMessage)
-                }
-                else if(item.data.orderStatus == "CANCELLED"){
-                    toast.error(item.data.orderMessage)
-                }
-            })
+        if (quantity > 0) {
+            axios.post(`http://localhost:4040/stocks/buy-stk=${stockId}-prtfl=${+portfolioId}-qnt=${+quantity}`)
+                .then(item => {
+                    console.log(item.data);
+                    if (item.data.orderStatus == "COMPLETED") {
+                        toast.success(item.data.orderMessage)
+                    }
+                    else if (item.data.orderStatus == "CANCELLED") {
+                        toast.error(item.data.orderMessage)
+                    }
+                })
+        }
+        else {
+            toast.error('Please enter a valid quantity.')
+        }
+    }
+    function sell(stockId, portfolioId, quantity) {
+        if (quantity > 0) {
+            axios.post(`http://localhost:4040/stocks/sell-stk=${stockId}-prtfl=${+portfolioId}-qnt=${+quantity}`)
+                .then(item => {
+                    console.log(item.data);
+                    if (item.data.orderStatus == "COMPLETED") {
+                        toast.success(item.data.orderMessage)
+                    }
+                    else if (item.data.orderStatus == "CANCELLED") {
+                        toast.error(item.data.orderMessage)
+                    }
+                })
+        }
+        else {
+            toast.error('Please enter a valid quantity.')
+        }
     }
 
     if (!selectedExchange) {
@@ -120,7 +139,7 @@ function Trade({ investor, id, allStock, selectedStock, setSelectedStock }) {
                     </div>
                     <div className='buy-sell-buttons'>
                         <p onClick={() => buy(selectedStock.stockID, id, quantity)} >Buy</p>
-                        <p>Sell</p>
+                        <p onClick={() => sell(selectedStock.stockID, id, quantity)} >Sell</p>
                     </div>
                 </div>
             </div>

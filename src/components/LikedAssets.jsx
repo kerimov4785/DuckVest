@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function LikedAssets({ stocks }) {
+function LikedAssets({sell, stocks }) {
     return (
         <div className='liked-table'>
             <div className="liked-table-header">
@@ -21,7 +21,7 @@ function LikedAssets({ stocks }) {
                         <div>{item?.ask}</div>
                         <div>{item?.price}</div>
                         <div className={`${item?.change}`.startsWith('-') ? 'red' : 'green'} >{item?.change}</div>
-                        <div className='buy-button'>
+                        <div onClick={() => sell(item.stockID)} className='buy-button'>
                             <p>Buy</p>
                         </div>
                     </div>

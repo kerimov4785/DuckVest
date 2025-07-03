@@ -1,8 +1,10 @@
 import { Bookmark } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FaBookmark, FaRegBookmark } from 'react-icons/fa6'
+import { DataContext } from '../DataContext/Context';
 
-function AllAssets({ stocks, id, letJarr, allStock }) {
+function AllAssets({ stocks, letJarr}) {
+    let {allStock,id} = useContext(DataContext)
     const toggleLike = (stockId) => {
         let obj = allStock.find(item => item.stockID == id)
         if (!stocks.find(item => item.stockID == stockId)) {
