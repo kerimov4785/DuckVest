@@ -4,6 +4,7 @@ import Chart from '../components/Chart'
 import MyAssets from '../components/MyAssets';
 import axios from 'axios';
 import { DataContext } from '../DataContext/Context';
+import toast from 'react-hot-toast';
 function Portfolio({ sell }) {
     let { portfolio, investor, id, setInvestor } = useContext(DataContext)
     function getRandomSortedNumbers(count, max) {
@@ -21,8 +22,8 @@ function Portfolio({ sell }) {
     });
     let [animation, setAnim] = useState(true)
     useEffect(() => {
-        const result = getRandomSortedNumbers(59, investor.buyingPower);
-        result.push(investor.buyingPower);
+        const result = getRandomSortedNumbers(59, investor.portfolioBalance);
+        result.push(investor.portfolioBalance);
         const result2 = getRandomSortedNumbers(59, 120);
         result2.push(120);
         const result3 = getRandomSortedNumbers(59, 150);
@@ -47,7 +48,7 @@ function Portfolio({ sell }) {
             }
         };
         update(0);
-    }, [portfolio]);
+    }, [investor]);
     let a = [
         { title: "Total value", value: `$${last.card1}`.slice(0, 8), },
         { title: "Today's Change", value: `+ $${last.card2}`, },
@@ -93,7 +94,7 @@ function Portfolio({ sell }) {
                             .then(data => {
                                 setAnim(false);
                                 setInvestor(data.data);
-                                console.log(data.data);
+                                toast.success('You have topped up your balance')
                             })
                             .catch(err => {
                                 console.error("Ошибка в запросах:", err);

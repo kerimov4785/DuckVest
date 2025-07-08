@@ -41,37 +41,41 @@ function Trade() {
         });
     }
     function buy(stockId, portfolioId, quantity) {
-        if (quantity > 0) {
-            axios.post(`http://localhost:4040/stocks/buy-stk=${stockId}-prtfl=${+portfolioId}-qnt=${+quantity}`)
-                .then(item => {
-                    console.log(item.data);
-                    if (item.data.orderStatus == "COMPLETED") {
-                        toast.success(item.data.orderMessage)
-                    }
-                    else if (item.data.orderStatus == "CANCELLED") {
-                        toast.error(item.data.orderMessage)
-                    }
-                })
-        }
-        else {
-            toast.error('Please enter a valid quantity.')
+        if (confirm('are you sure?')) {
+            if (quantity > 0) {
+                axios.post(`http://localhost:4040/stocks/buy-stk=${stockId}-prtfl=${+portfolioId}-qnt=${+quantity}`)
+                    .then(item => {
+                        console.log(item.data);
+                        if (item.data.orderStatus == "COMPLETED") {
+                            toast.success(item.data.orderMessage)
+                        }
+                        else if (item.data.orderStatus == "CANCELLED") {
+                            toast.error(item.data.orderMessage)
+                        }
+                    })
+            }
+            else {
+                toast.error('Please enter a valid quantity.')
+            }
         }
     }
     function sell(stockId, portfolioId, quantity) {
-        if (quantity > 0) {
-            axios.post(`http://localhost:4040/stocks/sell-stk=${stockId}-prtfl=${+portfolioId}-qnt=${+quantity}`)
-                .then(item => {
-                    console.log(item.data);
-                    if (item.data.orderStatus == "COMPLETED") {
-                        toast.success(item.data.orderMessage)
-                    }
-                    else if (item.data.orderStatus == "CANCELLED") {
-                        toast.error(item.data.orderMessage)
-                    }
-                })
-        }
-        else {
-            toast.error('Please enter a valid quantity.')
+        if (confirm('are you sure?')) {
+            if (quantity > 0) {
+                axios.post(`http://localhost:4040/stocks/sell-stk=${stockId}-prtfl=${+portfolioId}-qnt=${+quantity}`)
+                    .then(item => {
+                        console.log(item.data);
+                        if (item.data.orderStatus == "COMPLETED") {
+                            toast.success(item.data.orderMessage)
+                        }
+                        else if (item.data.orderStatus == "CANCELLED") {
+                            toast.error(item.data.orderMessage)
+                        }
+                    })
+            }
+            else {
+                toast.error('Please enter a valid quantity.')
+            }
         }
     }
 
