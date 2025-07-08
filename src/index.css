@@ -1034,11 +1034,10 @@ main {
   margin-top: 30px;
   display: flex;
   gap: 20px;
+  width: calc(100vw - 340px);
 }
-
 .info-panel {
   width: 60%;
-  height: min-content;
 }
 
 .info-panel,
@@ -1075,7 +1074,7 @@ main {
 .info-panel h3 {
   font: 400 15px 'Inter';
   color: #ff7125;
-  margin: 10px 0 15px;
+  margin-top: 10px;
 }
 
 .market-time {
@@ -1084,7 +1083,7 @@ main {
   border-radius: 8px;
   font: 300 14px 'Inter';
   color: #b7c4db;
-  margin-bottom: 10px;
+  margin-block: 18px;
 }
 
 .market-time p {
@@ -1112,6 +1111,13 @@ main {
   margin-bottom: 20px;
 }
 
+.buy-inputs{
+  display: flex;
+  gap: 10px;
+}
+.buy-inputs > div{
+  width: 100%;
+}
 .buy-input-box>p {
   font: 300 15px 'Inter';
   color: #ffffffce;
@@ -1174,6 +1180,11 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   /* Chrome, Safari, Edge */
   margin: 0;
+}
+
+.chart2{
+  margin-top: 20px;
+  width: calc(60% + 365px);
 }
 
 @keyframes scanline {

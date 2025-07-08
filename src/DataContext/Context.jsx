@@ -31,6 +31,7 @@ function Context({ children }) {
                 setInvestor(data.data)
             })
     }, [location])
+
     return (
         <DataContext.Provider value={
             { portfolio, setPortfolio, id, setId, selectedStock, setSelectedStock, allStock, setAllStock,investor, setInvestor }}>

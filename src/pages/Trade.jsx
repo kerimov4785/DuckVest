@@ -3,6 +3,8 @@ import { ChevronDown } from 'lucide-react';
 import React, { useContext, useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { DataContext } from '../DataContext/Context';
+import Chart from '../components/Chart';
+import StockChart from '../components/StockChart';
 
 function Trade() {
     let { investor, id, allStock, selectedStock, setSelectedStock } = useContext(DataContext)
@@ -12,6 +14,21 @@ function Trade() {
     let [quantity, setQuantity] = useState(0)
     let [dropStatus, setDropStatus] = useState(false)
     let [selectedExchange, setSelectedExchange] = useState(null)
+    let [stockPrices, setStockPrices] = useState([])
+
+    useEffect(() => {
+        axios.get(`https://api.twelvedata.com/time_series?symbol=${selectedStock.symbol}&interval=1month&outputsize=12&apikey=2668a95a0a5a4c948bd57bdf32c258ed`)
+            .then(response => {
+                if (response.data && response.data.values) {
+                    setStockPrices(response.data.values.reverse());
+                } else {
+                    setStockPrices([]);
+                }
+            })
+            .catch(error => {
+                console.error("Ошибка загрузки данных акции:", error);
+            });
+    }, [selectedStock])
 
     useEffect(() => {
         axios.get(`http://localhost:4040/exchanges/get-id=${selectedStock.stockExchangeSummaryDTO.id}`)
@@ -123,16 +140,18 @@ function Trade() {
                         <p>Quantity</p>
                         <input type="number" value={quantity} placeholder='Quantity' onChange={(e) => changeModul(e.target.value)} />
                     </div>
-                    <div className="buy-input-box">
-                        <p>Total Buy</p>
-                        <div>
-                            <p>${totalAsk}</p>
+                    <div className='buy-inputs'>
+                        <div className="buy-input-box">
+                            <p>Total Buy</p>
+                            <div>
+                                <p>${totalAsk}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div className="buy-input-box">
-                        <p>Total Sell</p>
-                        <div>
-                            <p>${totalBid}</p>
+                        <div className="buy-input-box">
+                            <p>Total Sell</p>
+                            <div>
+                                <p>${totalBid}</p>
+                            </div>
                         </div>
                     </div>
                     <div className="buy-input-box">
@@ -147,6 +166,10 @@ function Trade() {
                     </div>
                 </div>
             </div>
+            {stockPrices.length != 0 ? 
+            <StockChart stockPrices={stockPrices} /> :
+            null
+        }
         </div>
     )
 }
