@@ -144,13 +144,13 @@ function Trade() {
                         <div className="buy-input-box">
                             <p>Total Buy</p>
                             <div>
-                                <p>${totalAsk}</p>
+                                <p>${`${totalAsk}`.slice(0,7)}</p>
                             </div>
                         </div>
                         <div className="buy-input-box">
                             <p>Total Sell</p>
                             <div>
-                                <p>${totalBid}</p>
+                                <p>${`${totalBid}`.slice(0,7)}</p>
                             </div>
                         </div>
                     </div>

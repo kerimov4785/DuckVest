@@ -4,10 +4,10 @@ import AchieveCard from '../components/AchieveCard'
 import { DataContext } from '../DataContext/Context'
 
 function Achievements() {
-    let {investor} = useContext(DataContext)
+    let { investor } = useContext(DataContext)
     return (
         <>
-            <div className='section' style={{ color: "white" }}>
+            <div >
                 <div className='portfolio-header'>
                     <h3>Achievements</h3>
                     <div className='person-info'>
@@ -18,13 +18,10 @@ function Achievements() {
                         </div>
                     </div>
                 </div>
-                <div className='section-content'>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit perferendis dicta consequatur fugit expedita asperiores quidem voluptatem tempora! Veritatis, eaque.</p>
-                    <div className='search'>
-                        < FaSearch className='icon' />
-                        <input type="text" />
-                    </div>
-                    <div>
+                <div className='achi-content'>
+                    <p>Unlock achievements as you grow your portfolio, make smart investments, and explore the market.
+                        Every badge tells the story of your financial journey.</p>
+                    <div className='all-ach' >
                         <AchieveCard />
                     </div>
                 </div>

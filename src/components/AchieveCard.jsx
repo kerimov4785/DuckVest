@@ -1,18 +1,10 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { GoGoal } from "react-icons/go";
+import { DataContext } from '../DataContext/Context';
 function AchieveCard() {
+  let { portfolio } = useContext(DataContext)
   return (
     <>
-        <div className='achCard'>
-            <img src="src/assets/medal.png" alt="" />
-            <h1>Top Investor</h1>
-            <h3>Achievement</h3>
-            <p className='pp'>Given to top-performing <br /> investors.</p>
-            <div className='goal'>
-                <GoGoal className='go' />
-                <p>Invested more than <br /> $10,000</p>
-            </div>
-        </div>
     </>
   )
 }

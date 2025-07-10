@@ -15,11 +15,11 @@ function LikedAssets({sell, stocks }) {
             <div className="liked-table-body">
                 {stocks.length != 0 ? stocks.map((item, i) =>
                     <div key={i} className='liked-table-row' style={{transform:"translateX(0)",  animation:'lastAsset .4s ease-in  1'}}>
-                        <div>{item?.companyName?.length >= 15 ? item?.companyName.slice(0, 15) + '...' : item?.companyName}</div>
-                        <div>{item?.symbol}</div>
-                        <div>{item?.bid}</div>
-                        <div>{item?.ask}</div>
-                        <div>{item?.price}</div>
+                        <div>{item.companyName?.length >= 15 ? item?.companyName.slice(0, 15) + '...' : item?.companyName}</div>
+                        <div>{item.symbol}</div>
+                        <div>{`${item.bid}`.slice(0,7)}</div>
+                        <div>{`${item.ask}`.slice(0,7)}</div>
+                        <div>{`${item.price}`.slice(0,7)}</div>
                         <div className={`${item?.change}`.startsWith('-') ? 'red' : 'green'} >{item?.change}</div>
                         <div onClick={() => sell(item.stockID)} className='buy-button'>
                             <p>Buy</p>

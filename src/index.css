@@ -221,7 +221,8 @@ main {
   border-radius: 20px;
 }
 
-.card {
+.card,
+.achCard {
   background: linear-gradient(135deg, rgba(35, 185, 183, 0.4), rgba(14, 95, 133, 0.3));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -416,7 +417,7 @@ main {
 }
 
 .stock-header {
-  padding:0 8px 10px 0;
+  padding: 0 8px 10px 0;
 }
 
 .stock-header>div,
@@ -806,92 +807,6 @@ main {
 }
 
 /* achievecard */
-.section {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  font-family: 'Inter';
-}
-
-.section h1 {
-  padding-top: 20px;
-  font-size: 30px;
-}
-
-.section-content {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.search {
-  background-color: #fff;
-  padding: 10px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  border-radius: 5px;
-
-}
-
-.search input {
-  width: 100%;
-  outline: none;
-  border: none;
-  font-size: 20px;
-}
-
-.search .icon {
-  font-size: 20px;
-  color: black;
-}
-
-.achCard {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  border: 1px solid white;
-  border-radius: 20px;
-  width: 250px;
-  align-items: center;
-  background: linear-gradient(180deg, #0C485D 0%, #002C3B 100%);
-  font-family: 'Inter';
-}
-
-.achCard h1 {
-  font-size: 28px;
-  font-weight: 700;
-}
-
-.achCard h3 {
-  font-size: 18px;
-  font-weight: 500;
-  color: rgb(103, 205, 212);
-}
-
-.achCard img {
-  width: 150px;
-}
-
-.pp {
-  font-size: 19px;
-  text-align: center;
-}
-
-.goal {
-  display: flex;
-  gap: 10px;
-  background-color: rgb(35, 170, 180);
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 15px;
-  align-items: center;
-}
-
-.go {
-  font-size: 20px;
-}
 
 /* login */
 .login-page {
@@ -1034,10 +949,12 @@ main {
   margin-top: 30px;
   display: flex;
   gap: 20px;
-  width: calc(100vw - 340px);
+  justify-content: space-between;
+  width: 100%;
 }
+
 .info-panel {
-  width: 60%;
+  width: calc(100% - 370px);
 }
 
 .info-panel,
@@ -1111,13 +1028,15 @@ main {
   margin-bottom: 20px;
 }
 
-.buy-inputs{
+.buy-inputs {
   display: flex;
   gap: 10px;
 }
-.buy-inputs > div{
+
+.buy-inputs>div {
   width: 100%;
 }
+
 .buy-input-box>p {
   font: 300 15px 'Inter';
   color: #ffffffce;
@@ -1132,13 +1051,20 @@ main {
   background: #0e5f85;
   transition: .3s;
 }
+
 .buy-sell-buttons p:first-child:hover {
   background: #36afe7;
 }
 
-.buy-sell-buttons p:last-child{
+.buy-sell-buttons p:last-child {
   background: rgba(255, 255, 255, 0.05);
+  transition: .3s;
 }
+
+.buy-sell-buttons p:last-child:hover {
+  background: rgba(255, 255, 255, 0.124);
+}
+
 .buy-sell-buttons p {
   cursor: pointer;
   color: white;
@@ -1182,9 +1108,10 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.chart2{
+.chart2 {
   margin-top: 20px;
-  width: calc(60% + 365px);
+  /* width: calc(60% + 365px); */
+  width: 100;
 }
 
 @keyframes scanline {
