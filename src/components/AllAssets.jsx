@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { FaBookmark, FaRegBookmark } from 'react-icons/fa6'
 import { DataContext } from '../DataContext/Context';
 
-function AllAssets({ stocks, letJarr}) {
+function AllAssets({inpWatch, stocks, letJarr}) {
     let {allStock,id} = useContext(DataContext)
     const toggleLike = (stockId) => {
         let obj = allStock.find(item => item.stockID == id)
@@ -20,7 +20,7 @@ function AllAssets({ stocks, letJarr}) {
         <div className='all-table'>
             <h4>All Stocks</h4>
             <div className="all-table-body">
-                {allStock.map((item) => (
+                {allStock.filter(item => item.companyName.toLowerCase().includes(inpWatch.toLowerCase()) || item.symbol.toLowerCase().includes(inpWatch.toLowerCase())).map((item) => (
                     <div key={item.stockID} className='stock-card gradient-1'>
                         <div>
                             <h3>{item.companyName}</h3>

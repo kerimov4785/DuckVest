@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { DataContext } from '../DataContext/Context';
 import Chart from '../components/Chart';
 import StockChart from '../components/StockChart';
+import Loader from '../components/Loader';
 
 function Trade() {
     let { investor, id, allStock, selectedStock, setSelectedStock } = useContext(DataContext)
@@ -15,6 +16,13 @@ function Trade() {
     let [dropStatus, setDropStatus] = useState(false)
     let [selectedExchange, setSelectedExchange] = useState(null)
     let [stockPrices, setStockPrices] = useState([])
+    let [inpTrade, setInpTrade] = useState('')
+    let [filteredTrade, setFilteredTrade] = useState([])
+    console.log(filteredTrade);
+    
+    useEffect(() => {
+        setFilteredTrade(allStock.filter(item => item.symbol.toLowerCase().includes(inpTrade.toLowerCase())))
+    }, [inpTrade])
 
     useEffect(() => {
         axios.get(`https://api.twelvedata.com/time_series?symbol=${selectedStock.symbol}&interval=1month&outputsize=12&apikey=2668a95a0a5a4c948bd57bdf32c258ed`)
@@ -58,46 +66,47 @@ function Trade() {
         });
     }
     function buy(stockId, portfolioId, quantity) {
-        if (confirm('are you sure?')) {
-            if (quantity > 0) {
-                axios.post(`http://localhost:4040/stocks/buy-stk=${stockId}-prtfl=${+portfolioId}-qnt=${+quantity}`)
-                    .then(item => {
-                        console.log(item.data);
-                        if (item.data.orderStatus == "COMPLETED") {
-                            toast.success(item.data.orderMessage)
-                        }
-                        else if (item.data.orderStatus == "CANCELLED") {
-                            toast.error(item.data.orderMessage)
-                        }
-                    })
-            }
-            else {
-                toast.error('Please enter a valid quantity.')
-            }
+        if (quantity <= 0) {
+            return toast.error('Please enter a valid quantity.')
         }
+        if (!confirm('are you sure?')) {
+            return
+        }
+        const loadingToastId = toast.loading('Processing order...', { duration: 15000 })
+        axios.post(`http://localhost:4040/stocks/buy-stk=${stockId}-prtfl=${+portfolioId}-qnt=${+quantity}`)
+            .then(item => {
+                toast.dismiss(loadingToastId)
+                if (item.data.orderStatus == "COMPLETED") {
+                    toast.success(item.data.orderMessage)
+                }
+                else if (item.data.orderStatus == "CANCELLED") {
+                    toast.error(item.data.orderMessage)
+                }
+            })
     }
     function sell(stockId, portfolioId, quantity) {
-        if (confirm('are you sure?')) {
-            if (quantity > 0) {
-                axios.post(`http://localhost:4040/stocks/sell-stk=${stockId}-prtfl=${+portfolioId}-qnt=${+quantity}`)
-                    .then(item => {
-                        console.log(item.data);
-                        if (item.data.orderStatus == "COMPLETED") {
-                            toast.success(item.data.orderMessage)
-                        }
-                        else if (item.data.orderStatus == "CANCELLED") {
-                            toast.error(item.data.orderMessage)
-                        }
-                    })
-            }
-            else {
-                toast.error('Please enter a valid quantity.')
-            }
+        if (quantity <= 0) {
+            toast.error('Please enter a valid quantity.')
+            return
         }
-    }
+        if (!confirm('are you sure?')) {
+            return
+        }
+        const loadingToastId = toast.loading('Processing order...', { duration: 15000 })
 
+        axios.post(`http://localhost:4040/stocks/sell-stk=${stockId}-prtfl=${+portfolioId}-qnt=${+quantity}`)
+            .then(item => {
+                toast.dismiss(loadingToastId)
+                if (item.data.orderStatus == "COMPLETED") {
+                    toast.success(item.data.orderMessage)
+                }
+                else if (item.data.orderStatus == "CANCELLED") {
+                    toast.error(item.data.orderMessage)
+                }
+            })
+    }
     if (!selectedExchange) {
-        return
+        return <Loader />
     }
 
     return (
@@ -115,11 +124,11 @@ function Trade() {
             <p className='mini-title'>Select stock</p>
             <div className='dropdown-box'>
                 <div onClick={() => setDropStatus(true)}>
-                    <p >{selectedStock.symbol}</p>
+                    <input onChange={(e) => setInpTrade(e.target.value)} type="text" placeholder={selectedStock.symbol} />
                     <ChevronDown />
                 </div>
-                <div style={{ height: dropStatus ? '300px' : '0px', transition: '.4s ease-in', opacity: dropStatus ? 1 : 0 }} className='dropdown'>
-                    {allStock.map((item, ind) => <p key={ind} onClick={() => selectStock(item)} >{item.symbol}</p>)}
+                <div style={{ visibility: dropStatus ? 'visible' : 'hidden', transition: '.4s ease-in', opacity: dropStatus ? 1 : 0 }} className='dropdown'>
+                    {filteredTrade.length != 0 ? filteredTrade.map((item, ind) => <p key={ind} onClick={() => selectStock(item)} >{item.symbol}</p>) : <p>No results found</p> }
                 </div>
             </div>
             <div className='trade-panel'>
@@ -144,13 +153,13 @@ function Trade() {
                         <div className="buy-input-box">
                             <p>Total Buy</p>
                             <div>
-                                <p>${`${totalAsk}`.slice(0,7)}</p>
+                                <p>${`${totalAsk}`.slice(0, 7)}</p>
                             </div>
                         </div>
                         <div className="buy-input-box">
                             <p>Total Sell</p>
                             <div>
-                                <p>${`${totalBid}`.slice(0,7)}</p>
+                                <p>${`${totalBid}`.slice(0, 7)}</p>
                             </div>
                         </div>
                     </div>
@@ -166,10 +175,10 @@ function Trade() {
                     </div>
                 </div>
             </div>
-            {stockPrices.length != 0 ? 
-            <StockChart stockPrices={stockPrices} /> :
-            null
-        }
+            {stockPrices.length != 0 ?
+                <StockChart stockPrices={stockPrices} /> :
+                null
+            }
         </div>
     )
 }

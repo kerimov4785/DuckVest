@@ -12,6 +12,8 @@ import Register from "./pages/Register"
 import Trade from "./pages/Trade"
 import { Toaster } from "react-hot-toast";
 import { DataContext } from "./DataContext/Context";
+import Loader from "./components/Loader";
+import Orders from "./pages/Orders";
 
 function App() {
   let [inp1, setInp1] = useState()
@@ -45,7 +47,7 @@ function App() {
   }
   if (!investor || !selectedStock || !portfolio) {
     console.log('gozle')
-    return 'gozde biraz';
+    return <Loader />
   }
   return (
     <>
@@ -75,6 +77,7 @@ function App() {
           <Route path="/Watchlist/:username" element={<Watchlist sell={sell} />} />
           <Route path="/Achievements" element={<Achievements />} />
           <Route path="/Trade" element={<Trade/>} />
+          <Route path="/Orders" element={<Orders/>} />
         </Route>
         <Route path="/Login" element={<AdminLayout />} >
           <Route index element={<Register error={error} setInp1={setInp1} setInp2={setInp2} login={login} />} />

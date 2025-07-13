@@ -1,4 +1,4 @@
-import { ArrowLeftRight, BriefcaseBusiness, Medal, Star, User } from 'lucide-react'
+import { ArrowLeftRight, BriefcaseBusiness, ListOrdered, Medal, Star, User } from 'lucide-react'
 import React, { useState } from 'react'
 import { NavLink } from 'react-router'
 
@@ -22,6 +22,12 @@ function Sidebar({investor}) {
                         <div>
                             <User size={22} color='rgba(255, 255, 255,.4)' />
                             <p>Account</p>
+                        </div>
+                    </NavLink>
+                    <NavLink to={"/Orders"}>
+                        <div>
+                            <ListOrdered size={22} color='rgba(255, 255, 255,.4)' />
+                            <p>Orders</p>
                         </div>
                     </NavLink>
                     <NavLink to={`/Watchlist/${investor.username}`}>

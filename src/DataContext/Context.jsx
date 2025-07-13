@@ -11,6 +11,7 @@ function Context({ children }) {
     let [selectedStock, setSelectedStock] = useState()
     let [allStock, setAllStock] = useState([])
     let [investor, setInvestor] = useState()
+    let [allBadges,setAllBadges] = useState()
 
     useEffect(() => {
         axios.get('http://localhost:4040/stocks/all')
@@ -32,9 +33,13 @@ function Context({ children }) {
             })
     }, [location])
 
+    useEffect(() => {
+        axios.get(`http://localhost:4040/badges/get-all`)
+            .then(data => setAllBadges(data.data))
+    },[])
     return (
         <DataContext.Provider value={
-            { portfolio, setPortfolio, id, setId, selectedStock, setSelectedStock, allStock, setAllStock,investor, setInvestor }}>
+            { portfolio, setPortfolio, id, setId, selectedStock, setSelectedStock, allStock, setAllStock,investor, setInvestor,allBadges }}>
             {children}
         </DataContext.Provider>
     )

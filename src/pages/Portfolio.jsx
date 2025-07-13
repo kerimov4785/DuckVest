@@ -6,7 +6,7 @@ import axios from 'axios';
 import { DataContext } from '../DataContext/Context';
 import toast from 'react-hot-toast';
 function Portfolio({ sell }) {
-    let { portfolio, investor, id, setInvestor } = useContext(DataContext)
+    let { investor, id, setInvestor } = useContext(DataContext)
     function getRandomSortedNumbers(count, max) {
         const numbers = new Set();
         while (numbers.size < count) {
@@ -69,6 +69,31 @@ function Portfolio({ sell }) {
             setDateValue(e.target.value.slice(0, 2) + '/' + e.target.value.slice(2, 3))
         }
     }
+    async function topUpBalance() {
+        setInpValue('')
+        setCashStatus(false)
+        try {
+            await axios.post(`http://localhost:4040/bank/add-money-amount=${inpValue}-investorid=${id}`);
+            const data = await axios.get(`http://localhost:4040/investors/get-account-information-id=${id}`);
+            setAnim(false);
+            setInvestor(data.data);
+        } catch (err) {
+            console.error("Ошибка в запросах:", err);
+        }
+    }
+    function submitBalance(e) {
+        e.preventDefault();
+
+        toast.promise(
+            topUpBalance(),
+            {
+                loading: 'Saving...',
+                success: <b>Balance topped up!</b>,
+                error: <b>Could not save.</b>,
+            }
+        );
+
+    }
     let modalStyle = {
         transform: cashStatus ? 'translateY(0px)' : 'translateY(-100px)',
         opacity: cashStatus ? 1 : 0,
@@ -83,23 +108,7 @@ function Portfolio({ sell }) {
 
                     <h2 className="modal-title">Deposit Funds</h2>
 
-                    <form className="modal-form" onSubmit={(e) => {
-                        setInpValue('')
-                        e.preventDefault();
-                        setCashStatus(false)
-                        axios.post(`http://localhost:4040/bank/add-money-amount=${inpValue}-investorid=${id}`)
-                            .then(() => {
-                                return axios.get(`http://localhost:4040/investors/get-account-information-id=${id}`);
-                            })
-                            .then(data => {
-                                setAnim(false);
-                                setInvestor(data.data);
-                                toast.success('You have topped up your balance')
-                            })
-                            .catch(err => {
-                                console.error("Ошибка в запросах:", err);
-                            });
-                    }}>
+                    <form className="modal-form" onSubmit={(e) => submitBalance(e)}>
                         <div className="form-group">
                             <label htmlFor="cardNumber">Card Number</label>
                             <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxLength="19" required />

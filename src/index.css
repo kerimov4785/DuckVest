@@ -145,21 +145,6 @@ main {
       transparent 4px);
 }
 
-/* main {
-  margin-left: 260px;
-  padding-bottom: 30px;
-  min-height: 100vh;
-
-  background-image: 
-    url('/src/assets/asfalt-light.png'), 
-    linear-gradient(57.94deg, #101c3b 55.84%, #071436 99.96%);
-    
-  background-blend-mode:overlay;
-  background-repeat: repeat;
-  background-attachment: fixed;
-  color: white;
-} */
-
 .portfolio-header,
 .watchlist-header {
   display: flex;
@@ -221,8 +206,7 @@ main {
   border-radius: 20px;
 }
 
-.card,
-.achCard {
+.card {
   background: linear-gradient(135deg, rgba(35, 185, 183, 0.4), rgba(14, 95, 133, 0.3));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -616,6 +600,7 @@ main {
   border-radius: 7px;
   padding: 13px 40px;
   width: 100%;
+  border: 1px solid rgba(8, 21, 55, 0.5);
 }
 
 .watchlist input:focus {
@@ -886,15 +871,17 @@ main {
   cursor: pointer;
   position: relative;
   width: 300px;
-  border: 1px solid #152549a4;
   background-color: rgba(10, 25, 61, 0.5);
   color: rgb(255, 255, 255);
   border-radius: 10px;
   font: 300 16px 'Inter';
   margin-top: 5px;
 }
+.buy-input-box > div{
+  border: 1px solid #152549a4;
+}
 
-.dropdown-box p,
+.dropdown-box input,
 .dropdown p,
 .buy-input-box>div p {
   padding: 9px 10px;
@@ -902,11 +889,11 @@ main {
 
 .dropdown {
   position: absolute;
-  height: 300px;
+  min-width: min-content;
+  max-height: 300px;
   width: 100%;
   top: 45px;
   overflow-y: scroll;
-  left: -1px;
   border-radius: 10px;
   border: 1px solid #152549a4;
   background-color: rgba(10, 25, 61, 0.5);
@@ -917,6 +904,18 @@ main {
 .dropdown p:hover {
   background-color: rgba(14, 34, 80, 0.5);
   cursor: pointer;
+}
+
+.dropdown-box input {
+  border-radius: 10px;
+  border: 1px solid #152549a4;
+  background-color: transparent;
+  width: 100%;
+  outline: none;
+}
+.dropdown-box input::placeholder,.dropdown-box input{
+  color: white;
+  font: 300 16px 'Inter';
 }
 
 .dropdown-box svg {
@@ -1098,21 +1097,141 @@ main {
 
 input[type=number] {
   -moz-appearance: textfield;
-  /* Firefox */
 }
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
-  /* Chrome, Safari, Edge */
   margin: 0;
 }
 
 .chart2 {
   margin-top: 20px;
-  /* width: calc(60% + 365px); */
   width: 100;
 }
+
+/* loader */
+
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.loader-circle {
+  width: 64px;
+  height: 64px;
+  border: 6px solid transparent;
+  border-top: 6px solid #2563eb;
+  border-right: 6px solid #f97316;
+  border-bottom: 6px solid #14b8a6;
+  border-left: 6px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 12px;
+}
+
+.loader-text {
+  font-size: 16px;
+  color: #2563eb;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+/* achievements */
+
+.achi-content>p {
+  color: rgba(255, 255, 255, 0.534);
+  font: 400 16px 'Inter';
+  margin-top: 20px;
+}
+
+.all-ach {
+  display: flex;
+  margin-top: 30px;
+  gap: 15px;
+}
+
+.flipper {
+  position: relative;
+  width: 200px;
+  height: 310px;
+}
+
+.achCard,
+.achCardBack {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 10px;
+  align-items: center;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(35, 185, 183, 0.4), rgba(14, 95, 133, 0.3));
+  backdrop-filter: blur(10px);
+  border: 2px solid #e7ae85;
+  border-radius: 15px;
+  transition: .5s;
+  backface-visibility: hidden;
+}
+
+.achCardBack {
+  transform: rotateY(180deg);
+}
+
+.achCard div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  height: 135px;
+}
+
+.achCard div:last-child {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 9px;
+  background-color: #0e5f85;
+}
+
+.achCard div:last-child p,.achCardBack p {
+  text-align: center;
+  font: 400 14px 'Inter';
+  color: white;
+}
+
+.achCard h2 {
+  text-align: center;
+  font: 700 20px 'Inter';
+  color: white;
+}
+
+.achCard>p {
+  font: 400 16px 'Inter';
+  color: #36afe7;
+  margin: 10px 0 13px 0;
+}
+
+.achCard h4 {
+  text-align: center;
+  font: 400 15px 'Inter';
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+}
+
+.achCard img {
+  width: 110px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 
 @keyframes scanline {
   0% {

@@ -4,7 +4,7 @@ import AchieveCard from '../components/AchieveCard'
 import { DataContext } from '../DataContext/Context'
 
 function Achievements() {
-    let { investor } = useContext(DataContext)
+    let { investor, allBadges } = useContext(DataContext)
     return (
         <>
             <div >
@@ -22,7 +22,9 @@ function Achievements() {
                     <p>Unlock achievements as you grow your portfolio, make smart investments, and explore the market.
                         Every badge tells the story of your financial journey.</p>
                     <div className='all-ach' >
-                        <AchieveCard />
+                        {allBadges.map((item,i) =>
+                            <AchieveCard key={i} item={item} />
+                        )}
                     </div>
                 </div>
             </div>

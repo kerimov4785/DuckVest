@@ -5,9 +5,7 @@ import {
 
 // Пример данных
 
-function StockChart({stockPrices}) {
-    console.log(stockPrices);
-    
+function StockChart({stockPrices}) {    
     const data = stockPrices.map(item => (
         { name: item['datetime'].slice(5, 7), value: +item['close'] }
     ))
