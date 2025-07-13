@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import React, { useContext, useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { DataContext } from '../DataContext/Context';
@@ -125,7 +125,7 @@ function Trade() {
             <div className='dropdown-box'>
                 <div onClick={() => setDropStatus(true)}>
                     <input onChange={(e) => setInpTrade(e.target.value)} type="text" placeholder={selectedStock.symbol} />
-                    <ChevronDown />
+                    { !dropStatus ? <ChevronDown /> : <ChevronUp/> }
                 </div>
                 <div style={{ visibility: dropStatus ? 'visible' : 'hidden', transition: '.4s ease-in', opacity: dropStatus ? 1 : 0 }} className='dropdown'>
                     {filteredTrade.length != 0 ? filteredTrade.map((item, ind) => <p key={ind} onClick={() => selectStock(item)} >{item.symbol}</p>) : <p>No results found</p> }
