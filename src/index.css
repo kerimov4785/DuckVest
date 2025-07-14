@@ -633,7 +633,6 @@ main {
 
 .liked-table {
   width: 70%;
-  /* background-color: #071230; */
   border-radius: 10px;
   padding: 0 10px 20px 20px;
   background: rgba(8, 21, 55, 0.5);
@@ -1233,6 +1232,38 @@ input[type=number]::-webkit-outer-spin-button {
 
 .achCard img {
   width: 110px;
+}
+
+/* orders */
+
+.orders-table {
+  border-radius: 10px;
+  padding-top:30px;
+  background: rgba(8, 21, 55, 0.5);
+  backdrop-filter: blur(4px);
+  border: 1px solid #152549a4;
+  overflow: hidden;
+}
+
+.orders-table-header {
+  display: flex;
+  padding: 10px 0;
+  background-color:#050b22;
+}
+.orders-table-header h4,.orders-table-row h4{
+  color: white;
+  font: 400 15px 'Inter';
+  flex: 1;
+  text-align: center;
+}
+.orders-table-row{
+  display: flex;
+  padding: 10px 0;
+}
+
+.order-chart{
+  height: 350px;
+  margin-top: 20px;
 }
 
 @keyframes spin {

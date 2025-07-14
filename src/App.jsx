@@ -19,7 +19,7 @@ function App() {
   let [inp1, setInp1] = useState()
   let [inp2, setInp2] = useState()
   let [error, setError] = useState(false)
-  let {portfolio,setPortfolio,id,setId,selectedStock,setSelectedStock,allStock,setAllStock,investor, setInvestor} = useContext(DataContext)
+  let {portfolio,setId,selectedStock,setSelectedStock,allStock,investor, setInvestor} = useContext(DataContext)
 
   const navigate = useNavigate();
   function sell(id) {

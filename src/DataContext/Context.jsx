@@ -11,7 +11,11 @@ function Context({ children }) {
     let [selectedStock, setSelectedStock] = useState()
     let [allStock, setAllStock] = useState([])
     let [investor, setInvestor] = useState()
-    let [allBadges,setAllBadges] = useState()
+    let [allBadges, setAllBadges] = useState()
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
 
     useEffect(() => {
         axios.get('http://localhost:4040/stocks/all')
@@ -36,10 +40,10 @@ function Context({ children }) {
     useEffect(() => {
         axios.get(`http://localhost:4040/badges/get-all`)
             .then(data => setAllBadges(data.data))
-    },[])
+    }, [])
     return (
         <DataContext.Provider value={
-            { portfolio, setPortfolio, id, setId, selectedStock, setSelectedStock, allStock, setAllStock,investor, setInvestor,allBadges }}>
+            { portfolio, setPortfolio, id, setId, selectedStock, setSelectedStock, allStock, setAllStock, investor, setInvestor, allBadges,monthNames }}>
             {children}
         </DataContext.Provider>
     )

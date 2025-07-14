@@ -17,9 +17,7 @@ function Trade() {
     let [selectedExchange, setSelectedExchange] = useState(null)
     let [stockPrices, setStockPrices] = useState([])
     let [inpTrade, setInpTrade] = useState('')
-    let [filteredTrade, setFilteredTrade] = useState([])
-    console.log(filteredTrade);
-    
+    let [filteredTrade, setFilteredTrade] = useState([])    
     useEffect(() => {
         setFilteredTrade(allStock.filter(item => item.symbol.toLowerCase().includes(inpTrade.toLowerCase())))
     }, [inpTrade])
