@@ -877,7 +877,8 @@ main {
   font: 300 16px 'Inter';
   margin-top: 5px;
 }
-.buy-input-box > div{
+
+.buy-input-box>div {
   border: 1px solid #152549a4;
 }
 
@@ -913,9 +914,16 @@ main {
   width: 100%;
   outline: none;
 }
-.dropdown-box input::placeholder,.dropdown-box input{
+
+.dropdown-box input {
   color: white;
   font: 300 16px 'Inter';
+}
+
+.dropdown-box input::placeholder {
+  color: rgba(255, 255, 255, 0.434);
+  font: 300 16px 'Inter';
+
 }
 
 .dropdown-box svg {
@@ -1197,7 +1205,8 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: #0e5f85;
 }
 
-.achCard div:last-child p,.achCardBack p {
+.achCard div:last-child p,
+.achCardBack p {
   text-align: center;
   font: 400 14px 'Inter';
   color: white;

@@ -124,7 +124,7 @@ function Trade() {
             <p className='mini-title'>Select stock</p>
             <div className='dropdown-box'>
                 <div onClick={() => setDropStatus(true)}>
-                    <input onChange={(e) => setInpTrade(e.target.value)} type="text" placeholder={selectedStock.symbol} />
+                    <input onClick={(e) => (e.target.value = '' , setInpTrade(''))} onChange={(e) => setInpTrade(e.target.value)} type="text" value={!dropStatus ? selectedStock.symbol : null} placeholder={dropStatus ? 'Search for a trade' : selectedStock.symbol}/>
                     { !dropStatus ? <ChevronDown /> : <ChevronUp/> }
                 </div>
                 <div style={{ visibility: dropStatus ? 'visible' : 'hidden', transition: '.4s ease-in', opacity: dropStatus ? 1 : 0 }} className='dropdown'>

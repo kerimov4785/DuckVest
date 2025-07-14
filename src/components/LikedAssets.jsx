@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 
-function LikedAssets({sell, stocks }) {
+function LikedAssets({sell, stocks, stocksAPI }) {
+    // console.log(stocksAPI);
+    // if(!stocksAPI){
+    //     return 'as'
+    // }
     return (
         <div className='liked-table'>
             <div className="liked-table-header">
@@ -9,7 +13,7 @@ function LikedAssets({sell, stocks }) {
                 <div>Bid</div>
                 <div>Ask</div>
                 <div>Price</div>
-                <div>Change</div>
+                {/* <div>Change</div> */}
                 <div>Action</div>
             </div>
             <div className="liked-table-body">
@@ -20,7 +24,7 @@ function LikedAssets({sell, stocks }) {
                         <div>{`${item.bid}`.slice(0,7)}</div>
                         <div>{`${item.ask}`.slice(0,7)}</div>
                         <div>{`${item.price}`.slice(0,7)}</div>
-                        <div className={`${item?.change}`.startsWith('-') ? 'red' : 'green'} >{item?.change}</div>
+                        {/* <div className={`${item.price - stocksAPI[item.symbol]?.values[1]?.close}`.startsWith('-') ? 'red' : 'green'} >{`${item.price - stocksAPI[item.symbol]?.values[1]?.close}`.slice(0,8)}</div> */}
                         <div onClick={() => sell(item.stockID)} className='buy-button'>
                             <p>Buy</p>
                         </div>

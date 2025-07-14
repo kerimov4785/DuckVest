@@ -1,18 +1,21 @@
-import { Search } from 'lucide-react'
+import { Loader, Search } from 'lucide-react'
 import React, { useContext, useEffect, useState } from 'react'
 import AllAssets from '../components/AllAssets'
 import LikedAssets from '../components/LikedAssets'
 import { DataContext } from '../DataContext/Context'
+import axios from 'axios'
 
-function Watchlist({sell}) {
+function Watchlist({ sell }) {
     const [stocks, setStocks] = useState([])
+    const [stocksAPI, setStocksAPI] = useState([])
     let [jarr, letJarr] = useState([])
     let [inpWatch, setInpWatch] = useState('')
-    let {id ,investor,allStock} = useContext(DataContext)
+    let { id, investor } = useContext(DataContext)
+    let [symbols,setSymbols] = useState([])
+    
     useEffect(() => {
-        fetch(`http://localhost:4040/watchlist/get-wl=${id}`)
-            .then(res => res.json())
-            .then(data => setStocks(data.stocks))
+        axios(`http://localhost:4040/watchlist/get-wl=${id}`)
+            .then(data => setStocks(data.data.stocks))
     }, [jarr])
     return (
         <div className='watchlist'>
@@ -29,11 +32,11 @@ function Watchlist({sell}) {
             <h4>Assets you're tracking. Click to buy or trade.</h4>
             <div className='input-box'>
                 <Search />
-                <input onChange={(e) => setInpWatch(e.target.value) } type="text" placeholder='Search or filter assets...' />
+                <input onChange={(e) => setInpWatch(e.target.value)} type="text" placeholder='Search or filter assets...' />
             </div>
             <div className='watch-tables'>
-                <LikedAssets sell={sell} stocks={stocks} />
-                <AllAssets inpWatch={inpWatch} stocks={stocks} letJarr={letJarr}/>
+                <LikedAssets sell={sell} stocks={stocks} stocksAPI={stocksAPI} />
+                <AllAssets inpWatch={inpWatch} stocks={stocks} letJarr={letJarr} />
             </div>
         </div>
     )
