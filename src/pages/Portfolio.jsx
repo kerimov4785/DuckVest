@@ -5,6 +5,7 @@ import MyAssets from '../components/MyAssets';
 import axios from 'axios';
 import { DataContext } from '../DataContext/Context';
 import toast from 'react-hot-toast';
+import Analytics from '../components/Analytics';
 function Portfolio({ sell }) {
     let { investor, id, setInvestor } = useContext(DataContext)
     function getRandomSortedNumbers(count, max) {
@@ -47,7 +48,7 @@ function Portfolio({ sell }) {
                 }
             }
         };
-        update(0);
+        update(59);
     }, [investor]);
     let a = [
         { title: "Total value", value: `$${last.card1}`.slice(0, 8), },
@@ -158,6 +159,8 @@ function Portfolio({ sell }) {
                     </div>
                 </div>
             </div>
+            <h4 className='title2'>Portfolio Analytics</h4>
+            <Analytics/>
             <h4 className='title2'>Portfolio Performance</h4>
             <Chart />
             <h4 className='title2'>My Assets</h4>

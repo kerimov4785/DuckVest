@@ -14,14 +14,14 @@ import {
 } from 'recharts';
 import { DataContext } from '../DataContext/Context';
 
-function OrderChart() {
+function OrderChartSell() {
         const [data, setData] = useState([])
         const [objbidene, setObjBidene] = useState({})
         let { monthNames, portfolio } = useContext(DataContext)
         function getPriceForMonth(month) {
             let oneMonthPrices = portfolio.ordersList
-                .filter(item => item.orderStatus == 'COMPLETED' && item.orderType == 'BUY' && monthNames[new Date(item.date).getMonth()] == month)
-                .map(item => item.stockPrice * item.quantity + item.brokerFee)
+                .filter(item => item.orderStatus == 'COMPLETED' && item.orderType == 'SELL' && monthNames[new Date(item.date).getMonth()] == month)
+                .map(item => item.stockPrice * item.quantity - item.brokerFee)
             return oneMonthPrices.length != 0 ? oneMonthPrices.reduce((sum, item) => {
                 return sum + item
             }) : 0
@@ -71,10 +71,10 @@ function OrderChart() {
                     borderRadius: 8,
                     padding: '10px'
                 }} />
-                <Bar dataKey="uv" barSize={20} fill="#28e07d" />
+                <Bar dataKey="uv" barSize={20} fill="#FF7125" />
             </ComposedChart>
         </ResponsiveContainer>
     );
 }
 
-export default OrderChart
+export default OrderChartSell
