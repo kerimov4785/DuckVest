@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { DataContext } from '../DataContext/Context'
 import { Cell, Pie, PieChart } from 'recharts';
+import Loader from './Loader';
 
 function Analytics() {
     const [data, setData] = useState([])
@@ -17,8 +18,8 @@ function Analytics() {
     ]
     // '#',
     // '#'];
-    let [stockAnalytics, setStockAnalytics] = useState({})
-    let [industryAnalytics, setIndustryAnalytics] = useState([])
+    let [stockAnalytics, setStockAnalytics] = useState()
+    let [industryAnalytics, setIndustryAnalytics] = useState()
     let { id } = useContext(DataContext)
     let goodStyle = { border: '1px solid #28e07d', color: '#28e07d', backgroundColor: '#28e07e1a' }
     let riskStyle = { border: '1px solid #c40101', color: '#c40101', backgroundColor: '#c401011a' }
@@ -54,13 +55,13 @@ function Analytics() {
     }, [])
 
     if (!stockAnalytics || !industryAnalytics) {
-        return 'ok'
+        return <Loader/>
     }
     return (
         <div className='analytics' >
             <div className='stockDistribution' >
                 <div>
-                    {stockAnalytics.diversificationScore != 0 ?
+                    {Object.keys(stockAnalytics.stockDistribution).length != 0 ?
                         <PieChart width={190} height={190}>
                             <Pie
                                 data={data}
@@ -79,7 +80,7 @@ function Analytics() {
                         </PieChart> :
                         null
                     }
-                    <div className='div-score' style={{width: stockAnalytics.diversificationScore == 0 ? '100%' : null }} >
+                    <div className='div-score' style={{width: Object.keys(stockAnalytics.stockDistribution).length == 0 ? '100%' : null }} >
                         <h3>Stock Diversification</h3>
                         <h2 style={stockAnalytics.level == 'Good' || stockAnalytics.level == 'Excellent' ? goodStyle
                                 : stockAnalytics.level == 'Medium' ? mediumStyle
@@ -97,7 +98,7 @@ function Analytics() {
             </div>
             <div className='stockDistribution' >
                 <div>
-                    {industryAnalytics.diversificationScore != 0 ?
+                    {Object.keys(stockAnalytics.stockDistribution).length!= 0 ?
                         <PieChart width={190} height={190}>
                             <Pie
                                 data={data2}
@@ -115,7 +116,7 @@ function Analytics() {
                             </Pie>
                         </PieChart> : null
                     }
-                    <div className='div-score' style={{width: stockAnalytics.diversificationScore == 0 ? '100%' : null }} >
+                    <div className='div-score' style={{width: Object.keys(stockAnalytics.stockDistribution).length == 0 ? '100%' : null }} >
                         <h3>Industry Diversification</h3>
                         <h2 style={stockAnalytics.level == 'Good' || stockAnalytics.level == 'Excellent' ? goodStyle
                             : stockAnalytics.level == 'Medium' ? mediumStyle
