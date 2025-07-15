@@ -81,8 +81,7 @@ function Analytics() {
                     }
                     <div className='div-score' style={{width: stockAnalytics.diversificationScore == 0 ? '100%' : null }} >
                         <h3>Stock Diversification</h3>
-                        <h2 className='score-button-medium'
-                            style={stockAnalytics.level == 'Good' || stockAnalytics.level == 'Excellent' ? goodStyle
+                        <h2 style={stockAnalytics.level == 'Good' || stockAnalytics.level == 'Excellent' ? goodStyle
                                 : stockAnalytics.level == 'Medium' ? mediumStyle
                                     : riskStyle} >{stockAnalytics.level}</h2>
                         <p>{`${stockAnalytics.diversificationScore * 100}`.slice(0, 2)}%</p>
